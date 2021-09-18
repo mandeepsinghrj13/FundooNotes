@@ -60,5 +60,22 @@ class userModel {
       return callback("Internal Error", null);
     }
   };
+  //login
+  loginUser = (userDetails, callback) => {
+    try {
+      user.findOne({ email: userDetails.email }, (err, data) => {
+        if (err) {
+          return callback("error", null);
+        } else if (!data) {
+          return callback("invalid email", null);
+        } else {
+          //newUser.save();
+          return callback(null, data);
+        }
+      });
+    } catch (error) {
+      return callback("Internal Error", null);
+    }
+  };
 }
 module.exports = new userModel();

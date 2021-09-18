@@ -9,5 +9,15 @@ class userService {
       }
     });
   };
+  //login
+  loginUser = (user, callback) => {
+    userModel.loginUser(user, (err, data) => {
+      if (err) {
+        return callback(err, null);
+      } else {
+        return callback(null, data);
+      }
+    });
+  };
 }
 module.exports = new userService();
