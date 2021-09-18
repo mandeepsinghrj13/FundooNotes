@@ -1,5 +1,5 @@
 const userService = require("../service/user.service.js");
-const validation = require("../userValidation/validation.js");
+const validation = require("../Utility/validation.js");
 class Controller {
   register = (req, res) => {
     try {
