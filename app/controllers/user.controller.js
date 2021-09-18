@@ -54,7 +54,7 @@ class Controller {
         if (error) {
           return res.status(400).json({
             success: false,
-            message: "User login",
+            message: "User login failed",
           });
         } else {
           res.status(200).json({
