@@ -27,5 +27,23 @@ class Validation {
       )
       .required(),
   });
+  //valdation login req.body
+  authUserLogin = Joi.object({
+    email: Joi.string()
+      .pattern(
+        new RegExp(
+          "^[a-zA-z]{2}([+-_ .]*[a-zA-Z0-9]+)*[@][a-zA-z0-9]+(.[a-z]{2,3})*$"
+        )
+      )
+      .required(),
+
+    Password: Joi.string()
+      .pattern(
+        new RegExp(
+          "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})"
+        )
+      )
+      .required(),
+  });
 }
 module.exports = new Validation();

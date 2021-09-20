@@ -14,17 +14,16 @@ class userService {
   loginUser = (user, callback) => {
     userModel.loginUser(user, (err, data) => {
       if (data) {
+        //compare both password
         bcrypt.compare(user.Password, data.Password, (err, databaseData) => {
-          if (!databaseData) {
+          if (databaseData) {
             return callback(err + "invalid password", null);
           } else {
             return callback(null, data);
           }
         });
       } else {
-        return callback(
-          err + "invalid login info , please enter valid login info"
-        );
+        return callback("invalid login info , please enter valid login info");
       }
     });
   };

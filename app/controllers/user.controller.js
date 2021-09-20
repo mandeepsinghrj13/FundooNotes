@@ -42,13 +42,25 @@ class Controller {
       });
     }
   };
-  //login
+  //login start
   login = (req, res) => {
     try {
       const userLogin = {
         email: req.body.email,
         Password: req.body.Password,
       };
+      //loging validation
+      const validationLogin = validation.authUserLogin.validate(userLogin);
+
+      if (validationLogin.error) {
+        console.log(validationLogin.error);
+        return res.status(400).send({
+          success: false,
+          message: "Wrong Input Validations",
+          data: validationLogin,
+        });
+      }
+
       userService.loginUser(userLogin, (error, data) => {
         if (error) {
           return res.status(400).json({
@@ -70,6 +82,6 @@ class Controller {
         message: "server-error",
       });
     }
-  };
+  }; //login end
 }
 module.exports = new Controller();

@@ -18,7 +18,7 @@ const userSchema = mongoose.Schema(
     Password: {
       type: String,
       required: true,
-      minlength: 3,
+      minlength: 8,
     },
   },
   {
@@ -47,6 +47,7 @@ class userModel {
       email: userDetails.email,
       Password: userDetails.Password,
     });
+
     newUser.save((error, data) => {
       if (error) {
         callback(error, null);
