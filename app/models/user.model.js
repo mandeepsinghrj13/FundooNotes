@@ -47,29 +47,21 @@ class userModel {
       email: userDetails.email,
       Password: userDetails.Password,
     });
-    try {
-      user.findOne({ email: userDetails.email }, (err, data) => {
-        if (data) {
-          return callback("User already exist", null);
-        } else {
-          newUser.save();
-          return callback(null, newUser);
-        }
-      });
-    } catch (error) {
-      return callback("Internal Error", null);
-    }
+    newUser.save((error, data) => {
+      if (error) {
+        callback(error, null);
+      } else {
+        callback(null, data);
+      }
+    });
   };
   //login
   loginUser = (userDetails, callback) => {
     try {
       user.findOne({ email: userDetails.email }, (err, data) => {
-        if (err) {
-          return callback("error", null);
-        } else if (!data) {
-          return callback("invalid email", null);
+        if (!data) {
+          return callback(err + "invalid email", null);
         } else {
-          //newUser.save();
           return callback(null, data);
         }
       });

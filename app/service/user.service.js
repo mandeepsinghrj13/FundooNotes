@@ -15,8 +15,6 @@ class userService {
     userModel.loginUser(user, (err, data) => {
       if (data) {
         bcrypt.compare(user.Password, data.Password, (err, databaseData) => {
-          //console.log(user.Password);
-          //console.log(data.Password);
           if (!databaseData) {
             return callback(err + "invalid password", null);
           } else {

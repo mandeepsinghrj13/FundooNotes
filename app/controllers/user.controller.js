@@ -9,7 +9,6 @@ class Controller {
         email: req.body.email,
         Password: req.body.Password,
       };
-
       const validationRegister = validation.authUserRegister.validate(user);
 
       if (validationRegister.error) {
