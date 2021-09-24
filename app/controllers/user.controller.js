@@ -3,6 +3,7 @@ const validation = require("../Utility/validation.js");
 class Controller {
   register = (req, res) => {
     try {
+      
       const user = {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
@@ -66,6 +67,7 @@ class Controller {
           return res.status(400).json({
             success: false,
             message: "User login failed",
+            //data: data,
           });
         } else {
           res.status(200).json({
@@ -78,7 +80,7 @@ class Controller {
     } catch (error) {
       return res.status(500).json({
         success: false,
-        data: null,
+        //data: null,
         message: "server-error",
       });
     }

@@ -1,0 +1,25 @@
+{
+    "user": {
+        "registration": {
+            "firstName": "mdeepp",
+            "lastName": "msinghh",
+            "email": "mdeepsinghh@gmail.com",
+            "Password": "mDeepsinghh@123"
+        },
+        "registrationWithNolastName": {
+            "firstName": "Lalit",
+            "email": "lalit1597@gmail.com",
+            "Password": "lalitawv@15#"
+        },
+        "registrationWithNoemailId": {
+            "firstName": "mandeep",
+            "lastName": "singh",
+            "Password": "Mandeepsingh12$"
+        },
+        "registrationWithNoPassword": {
+            "firstName": "Deep",
+            "lastName": "Singh",
+            "email": "mandeepsingh.12@gmail.com"
+        }
+    }
+}

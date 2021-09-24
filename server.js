@@ -1,7 +1,7 @@
 const express = require("express");
 //const bodyParser = require("body-parser");
 require("dotenv").config();
-// create express app
+
 const app = express();
 
 // parse requests of content-type - application/x-www-form-urlencoded
@@ -28,3 +28,4 @@ require("./app/routes/user.routes.js")(app);
 app.listen(process.env.PORT, () => {
   console.log("Server is listening on port : " + process.env.PORT);
 });
+module.exports = app;
