@@ -1,10 +1,10 @@
 {
     "user": {
         "registration": {
-            "firstName": "mdeepp",
-            "lastName": "msinghh",
-            "email": "mdeepsinghh@gmail.com",
-            "Password": "mDeepsinghh@123"
+            "firstName": "mandi",
+            "lastName": "jii",
+            "email": "mandijii@gmail.com",
+            "Password": "Mandijii@123"
         },
         "registrationWithNolastName": {
             "firstName": "Lalit",
@@ -20,6 +20,21 @@
             "firstName": "Deep",
             "lastName": "Singh",
             "email": "mandeepsingh.12@gmail.com"
+        },
+        "login": {
+            "email": "deepsingh@gmail.com",
+            "Password": "Deepsingh@123"
+        },
+        "loginWrongPassword": {
+            "email": "mdeepsinghh@gmail.com",
+            "Password": "Deepsinghh@123"
+        },
+        "loginWithoutPassword": {
+            "email": "mdeepsinghh@gmail.com"
+        },
+        "loginWithWrongEmail": {
+            "email": "deepsinghgmail.com",
+            "Password": "Deepsingh@123"
         }
     }
 }
