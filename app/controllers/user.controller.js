@@ -74,6 +74,7 @@ class Controller {
             success: true,
             //data: data,
             message: "loging successfully",
+            token: data,
           });
         }
       });

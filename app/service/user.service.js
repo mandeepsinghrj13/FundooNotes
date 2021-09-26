@@ -1,5 +1,6 @@
 const userModel = require("../models/user.model.js");
 const bcrypt = require("bcrypt");
+const helper = require("../Utility/helper")
 //creating a class
 class userService {
   // registraion for new user register
@@ -21,7 +22,14 @@ class userService {
           if (!databaseData) {
             return callback(err + "invalid password", null);
           } else {
-            return callback(null, data);
+            helper.jwtTokenGenerate(data, (err, token) =>{
+              if (token) {
+                return callback(null, token);
+              } else {
+                throw err;
+              }
+            })
+            
           }
         });
       } else {
