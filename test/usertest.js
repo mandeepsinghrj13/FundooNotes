@@ -16,7 +16,7 @@ describe("Registration for positive and negative ", () => {
    * it function for registration when key and value is proper with regex validation .
    * 
    * */
-  it("givenRegistrationDetails_whenProper_UserRegistered_successfully", (done) => {
+  it.skip("givenRegistrationDetails_whenProper_UserRegistered_successfully", (done) => {
     const registrationDetails = userInputs.user.registration
     chai
       .request(server)
@@ -24,9 +24,31 @@ describe("Registration for positive and negative ", () => {
       .send(registrationDetails)
       .end((err, res) => {
         if (err) {
-          console.log("error")
+          return done(err);
         }
         res.should.have.status(201);
+        res.body.should.have.property("success").eql(true);
+        res.body.should.have
+          .property("message")
+          .eql("User Data Inserted successfully");
+        done();
+      });
+  });
+  it("givenRegistrationDetails_whenProper_UserRegistered_Already exist", (done) => {
+    const registrationDetails = userInputs.user.registration
+    chai
+      .request(server)
+      .post("/register") 
+      .send(registrationDetails)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        res.should.have.status(409);
+        res.body.should.have.property("success").eql(false);
+        res.body.should.have
+          .property("message")
+          .eql("Already exist User");
         done();
       });
   });
@@ -42,9 +64,11 @@ describe("Registration for positive and negative ", () => {
       .send(registrationDetails)
       .end((err, res) => {
         if (err) {
-          console.log("error")
+          return done(err);
         }
         res.should.have.status(400);
+        res.body.should.have.property("success").eql(false);
+        res.body.should.have.property("message").eql("Wrong Input Validations");
         done();
       });
   });
@@ -59,7 +83,7 @@ describe("Registration for positive and negative ", () => {
       .send(registrationDetails)
       .end((err, res) => {
         if (err) {
-          console.log("error")
+          return done(err);
         }
         res.should.have.status(400);
         done();
@@ -76,9 +100,11 @@ describe("Registration for positive and negative ", () => {
       .send(registrationDetails)
       .end((err, res) => {
         if (err) {
-          console.log("error")
+          return done(err);
         }
         res.should.have.status(400);
+        res.body.should.have.property("success").eql(false);
+        res.body.should.have.property("message").eql("Wrong Input Validations");
         done();
       });
   });
@@ -89,16 +115,20 @@ describe("Login for positive and negative ", () => {
    * it function for login when key and value is proper with regex validation .
    */
   it("givenLoginDetails_whenProper_UserLogin_successfully", (done) => {
-    const registrationDetails = userInputs.user.login
+    const loginDetails = userInputs.user.login
     chai
       .request(server)
       .post("/login") 
-      .send(registrationDetails)
+      .send(loginDetails)
       .end((err, res) => {
         if (err) {
-          console.log("error")
+          return done(err);
         }
         res.should.have.status(200);
+        res.body.should.have.property("success").eql(true);
+         res.body.should.have
+           .property("message")
+           .eql("loging successfully");
         done();
       });
   });
@@ -106,16 +136,18 @@ describe("Login for positive and negative ", () => {
    * it function for login when user login with Wrong Password.
    * */
   it("givenLoginDetails_when_WrongPassword", (done) => {
-    const registrationDetails = userInputs.user.loginWrongPassword
+    const loginDetails = userInputs.user.loginWrongPassword
     chai
       .request(server)
       .post("/login")
-      .send(registrationDetails)
+      .send(loginDetails)
       .end((err, res) => {
-        if (err) {
-          console.log("error")
-        }
+        if(err){
+          return done(err);
+      }
         res.should.have.status(400);
+        res.body.should.have.property("success").eql(false);
+        res.body.should.have.property("message").eql("User login failed");
         done();
       });
   });
@@ -123,33 +155,38 @@ describe("Login for positive and negative ", () => {
    * it function for login when user login with Without Password.
    * */
   it("givenLoginDetails_whenNo_Password", (done) => {
-    const registrationDetails = userInputs.user.loginWithoutPassword
+    const loginDetails = userInputs.user.loginWithoutPassword
     chai
       .request(server)
       .post("/login")
-      .send(registrationDetails)
+      .send(loginDetails)
       .end((err, res) => {
         if (err) {
-          console.log("error")
+          return done(err);
         }
         res.should.have.status(400);
+        res.body.should.have.property("success").eql(false);
+        res.body.should.have.property("message").eql("Wrong Input Validations");
         done();
+        
       });
   });
   /**
    * it function for login when user login With Wrong Email.
    * */
   it("givenLoginDetails_whenWrongEmail", (done) => {
-    const registrationDetails = userInputs.user.loginWithWrongEmail
+    const loginDetails = userInputs.user.loginWithWrongEmail
     chai
       .request(server)
       .post("/login")
-      .send(registrationDetails)
+      .send(loginDetails)
       .end((err, res) => {
-        if (err) {
-          console.log("error")
-        }
+        if(err){
+          return done(err);
+      }
         res.should.have.status(400);
+        res.body.should.have.property("success").eql(false);
+        res.body.should.have.property("message").eql("Wrong Input Validations");
         done();
       });
   });
