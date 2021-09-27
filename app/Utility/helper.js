@@ -1,7 +1,8 @@
-//helper.js
+/* eslint-disable node/no-callback-literal */
+// helper.js
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-class helper {
+class Helper {
   hashing = (password, callback) => {
     bcrypt.hash(password, 10, (err, hashpassword) => {
       if (err) {
@@ -26,4 +27,4 @@ class helper {
     );
   };
 }
-module.exports = new helper();
+module.exports = new Helper();

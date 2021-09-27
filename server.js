@@ -1,5 +1,5 @@
 const express = require("express");
-//const bodyParser = require("body-parser");
+// const bodyParser = require("body-parser");
 require("dotenv").config();
 
 const app = express();
@@ -10,7 +10,7 @@ app.use(express.urlencoded({ extended: true }));
 // parse requests of content-type - application/json
 app.use(express.json());
 
-//connecting to database
+// connecting to database
 const dbConnection = require("./config/database.config.js");
 dbConnection.database();
 

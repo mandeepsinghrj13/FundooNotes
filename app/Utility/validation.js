@@ -1,3 +1,4 @@
+/* eslint-disable prefer-regex-literals */
 const Joi = require("joi");
 class Validation {
   authUserRegister = Joi.object({
@@ -27,7 +28,8 @@ class Validation {
       )
       .required(),
   });
-  //valdation login req.body
+
+  // valdation login req.body
   authUserLogin = Joi.object({
     email: Joi.string()
       .pattern(

@@ -28,6 +28,7 @@ const userSchema = mongoose.Schema(
 const user = mongoose.model("user", userSchema);
 class userModel {
   registerUser = (userDetails, callback) => {
+    // eslint-disable-next-line new-cap
     const newUser = new user({
       firstName: userDetails.firstName,
       lastName: userDetails.lastName,
@@ -49,19 +50,23 @@ class userModel {
       }
     });
   };
-  //login
+
+  // login
   loginUser = (userDetails, callback) => {
     try {
       user.findOne({ email: userDetails.email }, (err, data) => {
         if (!data) {
+          // eslint-disable-next-line node/no-callback-literal
           return callback(err + "invalid email", null);
         } else {
           return callback(null, data);
         }
       });
     } catch (error) {
+      // eslint-disable-next-line node/no-callback-literal
       return callback("Internal Error", null);
     }
   };
 }
+// eslint-disable-next-line new-cap
 module.exports = new userModel();

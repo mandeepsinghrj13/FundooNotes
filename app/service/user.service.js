@@ -1,8 +1,9 @@
+/* eslint-disable node/no-callback-literal */
 const userModel = require("../models/user.model.js");
 const bcrypt = require("bcrypt");
-const helper = require("../Utility/helper")
-//creating a class
-class userService {
+const helper = require("../Utility/helper");
+// creating a class
+class UserService {
   // registraion for new user register
   registerUser = (user, callback) => {
     userModel.registerUser(user, (err, data) => {
@@ -13,23 +14,23 @@ class userService {
       }
     });
   };
-  //login and compare password from user and database
+
+  // login and compare password from user and database
   loginUser = (user, callback) => {
     userModel.loginUser(user, (err, data) => {
       if (data) {
-        //compare both password
+        // compare both password
         bcrypt.compare(user.Password, data.Password, (err, databaseData) => {
           if (!databaseData) {
             return callback(err + "invalid password", null);
           } else {
-            helper.jwtTokenGenerate(data, (err, token) =>{
+            helper.jwtTokenGenerate(data, (err, token) => {
               if (token) {
                 return callback(null, token);
               } else {
                 throw err;
               }
-            })
-            
+            });
           }
         });
       } else {
@@ -40,4 +41,4 @@ class userService {
     });
   };
 }
-module.exports = new userService();
+module.exports = new UserService();
