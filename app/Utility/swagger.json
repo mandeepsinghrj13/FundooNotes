@@ -57,8 +57,38 @@
                     }
                 }
             }
+        },
+    
+    "/login": {
+        "post": {
+            "tags": ["Login"],
+            "description": "Login user",
+            "parameters": [
+                {
+                    "name": "Login",
+                    "in": "body",
+                    "description": "User that we want to login",
+                    "schema": {
+                        "$ref": "#/definitions/loginUser"
+                    }
+                }
+            ],
+
+            "produces": ["application/json"],
+            "responses": {
+                "200": {
+                    "description": "ok"
+                },
+                "404": {
+                    "description": "Not Found"
+                },
+                "400": {
+                    "description": "User login failed"
+                }
+            }
         }
-    },
+    }
+},
     "definitions": {
         "registerUser": {        
             "properties": {
@@ -68,6 +98,17 @@
                 "lastName": {
                     "type": "string"
                 },
+                "email": {
+                    "type": "string"
+                },
+                "Password": {
+                    "type": "string"
+                }
+            }
+        },
+        "loginUser": {
+            "type": "object",
+            "properties": {
                 "email": {
                     "type": "string"
                 },
