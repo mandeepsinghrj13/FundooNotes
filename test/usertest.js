@@ -11,13 +11,14 @@ chai.use(chaiHttp);
  * {send} registrationDetails geting into the json file
  *
  */
-describe("Registration for positive and negative ", () => {
+describe("registration for positive and negative ", () => {
   /**
    * it function for registration when key and value is proper with regex validation .
    *
    * */
-  it.skip("givenRegistrationDetails_whenProper_UserRegistered_successfully", (done) => {
+  it.skip("GivenRegistrationDetails_WhenProper_UserRegistered_Successfully", (done) => {
     const registrationDetails = userInputs.user.registration;
+    // console.log(registrationDetails);
     chai
       .request(server)
       .post("/register")
@@ -34,7 +35,7 @@ describe("Registration for positive and negative ", () => {
         done();
       });
   });
-  it("givenRegistrationDetails_whenProper_UserRegistered_Already exist", (done) => {
+  it("GivenRegistrationDetails_WhenProper_UserRegistered_Already Exist", (done) => {
     const registrationDetails = userInputs.user.registration;
     chai
       .request(server)
@@ -54,7 +55,7 @@ describe("Registration for positive and negative ", () => {
    * it function for registration when lastname not writen .
    *
    * */
-  it("givenRegistrationDetails_whenNo_LastNameInDB", (done) => {
+  it("GivenRegistrationDetails_WhenNo_LastNameInDB", (done) => {
     const registrationDetails = userInputs.user.registrationWithNolastName;
     chai
       .request(server)
@@ -73,7 +74,7 @@ describe("Registration for positive and negative ", () => {
   /**
    * it function for registration when user not writen email.
    * */
-  it("givenRegistrationDetails_whenNo_emailInDB", (done) => {
+  it("GivenRegistrationDetails_WhenNo_EmailInDB", (done) => {
     const registrationDetails = userInputs.user.registrationWithNoemailId;
     chai
       .request(server)
@@ -90,8 +91,110 @@ describe("Registration for positive and negative ", () => {
   /**
    * it function for registration when user not writen Password.
    * */
-  it("givenRegistrationDetails_whenNo_PasswordInDB", (done) => {
+  it("GivenRegistrationDetails_WhenNo_PasswordInDB", (done) => {
     const registrationDetails = userInputs.user.registrationWithNoPassword;
+    chai
+      .request(server)
+      .post("/register")
+      .send(registrationDetails)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        res.should.have.status(400);
+        res.body.should.have.property("success").eql(false);
+        res.body.should.have.property("message").eql("Wrong Input Validations");
+        done();
+      });
+  });
+  it("GivenRegistrationDetails_When_FirstnameatlisttwoLetter", (done) => {
+    const registrationDetails =
+      userInputs.user.registrationfirstnameatlisttwoLetter;
+    chai
+      .request(server)
+      .post("/register")
+      .send(registrationDetails)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        res.should.have.status(400);
+        res.body.should.have.property("success").eql(false);
+        res.body.should.have.property("message").eql("Wrong Input Validations");
+        done();
+      });
+  });
+  it("GivenRegistrationDetails_When_FirstnameSecondLetterShouldLower", (done) => {
+    const registrationDetails =
+      userInputs.user.RegistrationFirstnameSecondLetterShouldLower;
+    chai
+      .request(server)
+      .post("/register")
+      .send(registrationDetails)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        res.should.have.status(400);
+        res.body.should.have.property("success").eql(false);
+        res.body.should.have.property("message").eql("Wrong Input Validations");
+        done();
+      });
+  });
+  it("GivenRegistrationDetails_When_EmailDotComShouldLowerLatter", (done) => {
+    const registrationDetails =
+      userInputs.user.RegistrationEmailComShouldLowerLatter;
+    chai
+      .request(server)
+      .post("/register")
+      .send(registrationDetails)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        res.should.have.status(400);
+        res.body.should.have.property("success").eql(false);
+        res.body.should.have.property("message").eql("Wrong Input Validations");
+        done();
+      });
+  });
+  it("GivenRegistrationDetails_When_EmailStartWithTwoLetter", (done) => {
+    const registrationDetails =
+      userInputs.user.RegistrationEmailStartWithTwoLetter;
+    chai
+      .request(server)
+      .post("/register")
+      .send(registrationDetails)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        res.should.have.status(400);
+        res.body.should.have.property("success").eql(false);
+        res.body.should.have.property("message").eql("Wrong Input Validations");
+        done();
+      });
+  });
+  it("GivenRegistrationDetails_When_PasswordAtlistOneUpperLetter", (done) => {
+    const registrationDetails =
+      userInputs.user.RegistrationPasswordAtlistOneUpperLetter;
+    chai
+      .request(server)
+      .post("/register")
+      .send(registrationDetails)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        res.should.have.status(400);
+        res.body.should.have.property("success").eql(false);
+        res.body.should.have.property("message").eql("Wrong Input Validations");
+        done();
+      });
+  });
+  it("GivenRegistrationDetails_When_PasswordAtlistOneLowerLetter", (done) => {
+    const registrationDetails =
+      userInputs.user.RegistrationPasswordAtlistOneLowerLetter;
     chai
       .request(server)
       .post("/register")
@@ -108,11 +211,11 @@ describe("Registration for positive and negative ", () => {
   });
 });
 
-describe("Login for positive and negative ", () => {
+describe("login for positive and negative ", () => {
   /**
    * it function for login when key and value is proper with regex validation .
    */
-  it("givenLoginDetails_whenProper_UserLogin_successfully", (done) => {
+  it("GivenLoginDetails_WhenProper_UserLogin_Successfully", (done) => {
     const loginDetails = userInputs.user.login;
     chai
       .request(server)
@@ -131,7 +234,7 @@ describe("Login for positive and negative ", () => {
   /**
    * it function for login when user login with Wrong Password.
    * */
-  it("givenLoginDetails_when_WrongPassword", (done) => {
+  it("GivenLoginDetails_When_WrongPassword", (done) => {
     const loginDetails = userInputs.user.loginWrongPassword;
     chai
       .request(server)
@@ -150,7 +253,7 @@ describe("Login for positive and negative ", () => {
   /**
    * it function for login when user login with Without Password.
    * */
-  it("givenLoginDetails_whenNo_Password", (done) => {
+  it("GivenLoginDetails_WhenNo_Password", (done) => {
     const loginDetails = userInputs.user.loginWithoutPassword;
     chai
       .request(server)
@@ -169,7 +272,7 @@ describe("Login for positive and negative ", () => {
   /**
    * it function for login when user login With Wrong Email.
    * */
-  it("givenLoginDetails_whenWrongEmail", (done) => {
+  it("GivenLoginDetails_WhenWrongEmail", (done) => {
     const loginDetails = userInputs.user.loginWithWrongEmail;
     chai
       .request(server)

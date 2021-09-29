@@ -3,7 +3,7 @@
         "registration": {
             "firstName": "mandibhai",
             "lastName": "jiibhai",
-            "email": "mandijiibhai@gmail.com",
+            "email": "mandijiibhaia@gmail.com",
             "Password": "Mandijiibhai@123"
         },
         "registrationWithNolastName": {
@@ -20,6 +20,42 @@
             "firstName": "Deep",
             "lastName": "Singh",
             "email": "mandeepsingh.12@gmail.com"
+        },
+        "registrationfirstnameatlisttwoLetter": {
+            "firstName": "D",
+            "lastName": "Singh",
+            "email": "mandeepsingh.12@gmail.com",
+            "Password": "Mandeepsingh12$"
+        },
+        "RegistrationFirstnameSecondLetterShouldLower": {
+            "firstName": "DD",
+            "lastName": "Singh",
+            "email": "mandeepsingh.12@gmail.com",
+            "Password": "Mandeepsingh12$"
+        },
+        "RegistrationEmailComShouldLowerLatter": {
+            "firstName": "Da",
+            "lastName": "Singh",
+            "email": "mandeepsingh.12@Gmail.COM",
+            "Password": "Mandeepsingh12$"
+        },
+        "RegistrationEmailStartWithTwoLetter": {
+            "firstName": "Da",
+            "lastName": "Singh",
+            "email": "m.12@Gmail.com",
+            "Password": "Mandeepsingh12$"
+        },
+        "RegistrationPasswordAtlistOneUpperLetter": {
+            "firstName": "Da",
+            "lastName": "Singh",
+            "email": "mandeep.12@Gmail.com",
+            "Password": "mandeepsingh12$"
+        },
+        "RegistrationPasswordAtlistOneLowerLetter": {
+            "firstName": "Da",
+            "lastName": "Singh",
+            "email": "mandeep.12@Gmail.com",
+            "Password": "MANDEEPSINGH12$"
         },
         "login": {
             "email": "deepsingh@gmail.com",
