@@ -107,6 +107,9 @@ describe("registration for positive and negative ", () => {
         done();
       });
   });
+  /**
+   * it function for registration when user not writen Firstname atlist twoLetter.
+   * */
   it("GivenRegistrationDetails_When_FirstnameatlisttwoLetter", (done) => {
     const registrationDetails =
       userInputs.user.registrationfirstnameatlisttwoLetter;
@@ -124,6 +127,9 @@ describe("registration for positive and negative ", () => {
         done();
       });
   });
+  /**
+   * it function for registration when user not writen Firstname SecondLetterShouldLower.
+   * */
   it("GivenRegistrationDetails_When_FirstnameSecondLetterShouldLower", (done) => {
     const registrationDetails =
       userInputs.user.RegistrationFirstnameSecondLetterShouldLower;
@@ -141,6 +147,9 @@ describe("registration for positive and negative ", () => {
         done();
       });
   });
+  /**
+   * it function for registration when user not writen Email DotCom ShouldLowerLatter.
+   * */
   it("GivenRegistrationDetails_When_EmailDotComShouldLowerLatter", (done) => {
     const registrationDetails =
       userInputs.user.RegistrationEmailComShouldLowerLatter;
@@ -158,6 +167,9 @@ describe("registration for positive and negative ", () => {
         done();
       });
   });
+  /**
+   * it function for registration when user not writen Email StartWith TwoLetter.
+   * */
   it("GivenRegistrationDetails_When_EmailStartWithTwoLetter", (done) => {
     const registrationDetails =
       userInputs.user.RegistrationEmailStartWithTwoLetter;
@@ -175,6 +187,9 @@ describe("registration for positive and negative ", () => {
         done();
       });
   });
+  /**
+   * it function for registration when user not writen Password Atlist OneUpperLetter.
+   * */
   it("GivenRegistrationDetails_When_PasswordAtlistOneUpperLetter", (done) => {
     const registrationDetails =
       userInputs.user.RegistrationPasswordAtlistOneUpperLetter;
@@ -192,6 +207,9 @@ describe("registration for positive and negative ", () => {
         done();
       });
   });
+  /**
+   * it function for registration when user not writen Password Atlist OneLowerLetter.
+   * */
   it("GivenRegistrationDetails_When_PasswordAtlistOneLowerLetter", (done) => {
     const registrationDetails =
       userInputs.user.RegistrationPasswordAtlistOneLowerLetter;
@@ -274,6 +292,121 @@ describe("login for positive and negative ", () => {
    * */
   it("GivenLoginDetails_WhenWrongEmail", (done) => {
     const loginDetails = userInputs.user.loginWithWrongEmail;
+    chai
+      .request(server)
+      .post("/login")
+      .send(loginDetails)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        res.should.have.status(400);
+        res.body.should.have.property("success").eql(false);
+        res.body.should.have.property("message").eql("Wrong Input Validations");
+        done();
+      });
+  });
+  /**
+   * it function for login when user Login With Out Email.
+   * */
+  it("GivenLoginDetails_WhenLoginWithOutEmail", (done) => {
+    const loginDetails = userInputs.user.LoginWithOutEmail;
+    chai
+      .request(server)
+      .post("/login")
+      .send(loginDetails)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        res.should.have.status(400);
+        res.body.should.have.property("success").eql(false);
+        res.body.should.have.property("message").eql("Wrong Input Validations");
+        done();
+      });
+  });
+  /**
+   * it function for login when user Login With InvalidEmail.
+   * */
+  it("GivenLoginDetails_WhenLoginWithInvalidEmail", (done) => {
+    const loginDetails = userInputs.user.LoginWithInvalidEmail;
+    chai
+      .request(server)
+      .post("/login")
+      .send(loginDetails)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        res.should.have.status(400);
+        res.body.should.have.property("success").eql(false);
+        res.body.should.have.property("message").eql("Wrong Input Validations");
+        done();
+      });
+  });
+  /**
+   * it function for login when user Login Should Atlist TwoLetter.
+   * */
+  it("GivenLoginDetails_WhenLoginShouldAtlistTwoLetter", (done) => {
+    const loginDetails = userInputs.user.LoginShouldAtlistTwoLetter;
+    chai
+      .request(server)
+      .post("/login")
+      .send(loginDetails)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        res.should.have.status(400);
+        res.body.should.have.property("success").eql(false);
+        res.body.should.have.property("message").eql("Wrong Input Validations");
+        done();
+      });
+  });
+  /**
+   * it function for login when user Login Password Atlist One SpecialCharacters.
+   * */
+  it("GivenLoginDetails_When_LoginPasswordAtlistOneSpecialCharacters", (done) => {
+    const loginDetails =
+      userInputs.user.LoginPasswordAtlistOneSpecialCharacters;
+    chai
+      .request(server)
+      .post("/login")
+      .send(loginDetails)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        res.should.have.status(400);
+        res.body.should.have.property("success").eql(false);
+        res.body.should.have.property("message").eql("Wrong Input Validations");
+        done();
+      });
+  });
+  /**
+   * it function for login when user Login Password Atlist OneLowerCharacter.
+   * */
+  it("GivenLoginDetails_WhenLoginPasswordAtlistOneLowerCharacter", (done) => {
+    const loginDetails = userInputs.user.LoginPasswordAtlistOneLowerCharacter;
+    chai
+      .request(server)
+      .post("/login")
+      .send(loginDetails)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        res.should.have.status(400);
+        res.body.should.have.property("success").eql(false);
+        res.body.should.have.property("message").eql("Wrong Input Validations");
+        done();
+      });
+  });
+  /**
+   * it function for login when user Login Password Atlist OneNumaricNumber .
+   * */
+  it("GivenLoginDetails_WhenLoginPasswordAtlistOneNumaricNumber", (done) => {
+    const loginDetails = userInputs.user.LoginPasswordAtlistOneNumaricNumber;
     chai
       .request(server)
       .post("/login")

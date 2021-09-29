@@ -71,6 +71,29 @@
         "loginWithWrongEmail": {
             "email": "deepsinghgmail.com",
             "Password": "Deepsingh@123"
+        },
+        "LoginWithOutEmail": {
+            "Password": "Deepsingh@123"
+        },
+        "LoginWithInvalidEmail": {
+            "email": "deepsingh@gmail.c",
+            "Password": "Deepsingh@123"
+        },
+        "LoginShouldAtlistTwoLetter": {
+            "email": "d@gmail.com",
+            "Password": "Deepsingh@123"
+        },
+        "LoginPasswordAtlistOneSpecialCharacters": {
+            "email": "deepsingh@gmail.com",
+            "Password": "Deepsingh123"
+        },
+        "LoginPasswordAtlistOneLowerCharacter": {
+            "email": "deepsingh@gmail.c",
+            "Password": "DEEP@123"
+        },
+        "LoginPasswordAtlistOneNumaricNumber": {
+            "email": "deepsingh@gmail.com",
+            "Password": "Deepsingh@"
         }
     }
 }
