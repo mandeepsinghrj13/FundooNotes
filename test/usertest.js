@@ -18,7 +18,6 @@ describe("registration for positive and negative ", () => {
    * */
   it.skip("GivenRegistrationDetails_WhenProper_UserRegistered_Successfully", (done) => {
     const registrationDetails = userInputs.user.registration;
-    // console.log(registrationDetails);
     chai
       .request(server)
       .post("/register")

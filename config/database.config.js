@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const logger = require("../app/Utility/logger");
 const url = process.env.URL;
 class DbConnection {
   database = () => {
@@ -9,10 +10,10 @@ class DbConnection {
         useNewUrlParser: true,
       })
       .then(() => {
-        console.log("Successfully connected to the database");
+        logger.info("Successfully connected to the database");
       })
       .catch((err) => {
-        console.log("Could not connect to the database. Exiting now...", err);
+        logger.error("Could not connect to the database. Exiting now...", err);
         process.exit();
       });
   };

@@ -1,4 +1,5 @@
 const userService = require("../service/user.service.js");
+const logger = require("../Utility/logger");
 const validation = require("../Utility/validation.js");
 
 class Controller {
@@ -13,7 +14,8 @@ class Controller {
       const validationRegister = validation.authUserRegister.validate(user);
 
       if (validationRegister.error) {
-        console.log(validationRegister.error);
+        // console.log(validationRegister.error);
+        logger.error("Wrong Input Validations");
         return res.status(400).send({
           success: false,
           message: "Wrong Input Validations",
@@ -23,11 +25,13 @@ class Controller {
 
       userService.registerUser(user, (error, data) => {
         if (error) {
+          logger.error("Already Exist User");
           return res.status(409).json({
             success: false,
             message: "Already exist User",
           });
         } else {
+          logger.info("User Data Inserted Successfully");
           res.status(201).json({
             success: true,
             // data: data,
@@ -36,6 +40,7 @@ class Controller {
         }
       });
     } catch (error) {
+      logger.error("server-error");
       return res.status(500).json({
         success: false,
         data: null,
@@ -55,7 +60,7 @@ class Controller {
       const validationLogin = validation.authUserLogin.validate(userLogin);
 
       if (validationLogin.error) {
-        console.log(validationLogin.error);
+        logger.error("Wrong Input Validations");
         return res.status(400).send({
           success: false,
           message: "Wrong Input Validations",
@@ -65,12 +70,14 @@ class Controller {
 
       userService.loginUser(userLogin, (error, data) => {
         if (error) {
+          logger.error("user login failed");
           return res.status(400).json({
             success: false,
             message: "User login failed",
             // data: data,
           });
         } else {
+          logger.info("loging successfully");
           res.status(200).json({
             success: true,
             // data: data,
@@ -80,6 +87,7 @@ class Controller {
         }
       });
     } catch (error) {
+      logger.error("server-error");
       return res.status(500).json({
         success: false,
         // data: null,

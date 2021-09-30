@@ -1,5 +1,8 @@
+/* eslint-disable new-cap */
+/* eslint-disable node/no-callback-literal */
 const mongoose = require("mongoose");
 const helper = require("../Utility/helper");
+const logger = require("../Utility/logger");
 const userSchema = mongoose.Schema(
   {
     firstName: {
@@ -28,7 +31,6 @@ const userSchema = mongoose.Schema(
 const user = mongoose.model("user", userSchema);
 class userModel {
   registerUser = (userDetails, callback) => {
-    // eslint-disable-next-line new-cap
     const newUser = new user({
       firstName: userDetails.firstName,
       lastName: userDetails.lastName,
@@ -42,8 +44,10 @@ class userModel {
         newUser.Password = hashpassword;
         newUser.save((error, data) => {
           if (error) {
+            logger.error("Not Save Data Because Allready There");
             callback(error, null);
           } else {
+            logger.info("Save Data With Hashing");
             callback(null, data);
           }
         });
@@ -56,17 +60,15 @@ class userModel {
     try {
       user.findOne({ email: userDetails.email }, (err, data) => {
         if (!data) {
-          // eslint-disable-next-line node/no-callback-literal
           return callback(err + "invalid email", null);
         } else {
           return callback(null, data);
         }
       });
     } catch (error) {
-      // eslint-disable-next-line node/no-callback-literal
+      logger.error("Internal Error");
       return callback("Internal Error", null);
     }
   };
 }
-// eslint-disable-next-line new-cap
 module.exports = new userModel();

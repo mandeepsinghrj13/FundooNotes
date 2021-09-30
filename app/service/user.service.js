@@ -2,6 +2,7 @@
 const userModel = require("../models/user.model.js");
 const bcrypt = require("bcrypt");
 const helper = require("../Utility/helper");
+const logger = require("../Utility/logger.js");
 // creating a class
 class UserService {
   // registraion for new user register
@@ -22,6 +23,7 @@ class UserService {
         // compare both password
         bcrypt.compare(user.Password, data.Password, (err, databaseData) => {
           if (!databaseData) {
+            logger.error("invalid password");
             return callback(err + "invalid password", null);
           } else {
             helper.jwtTokenGenerate(data, (err, token) => {
@@ -34,6 +36,9 @@ class UserService {
           }
         });
       } else {
+        logger.error(
+          "invalid login info , please enter valid email or password login info"
+        );
         return callback(
           err + "invalid login info , please enter valid login info"
         );
