@@ -58,8 +58,8 @@
             "Password": "MANDEEPSINGH12$"
         },
         "login": {
-            "email": "deepsingh@gmail.com",
-            "Password": "Deepsingh@123"
+            "email": "singh.mr.1996@gmail.com",
+            "Password": "Password@1234"
         },
         "loginWrongPassword": {
             "email": "mdeepsinghh@gmail.com",
@@ -94,6 +94,23 @@
         "LoginPasswordAtlistOneNumaricNumber": {
             "email": "deepsingh@gmail.com",
             "Password": "Deepsingh@"
+        }
+    },
+    "forgetpassworduser":{
+        "ProperEmail":{
+            "email": "singh.mr.1996@gmail.com"
+        },
+        "NotProperEmail":{
+            "email": "singh.mr.1996@gmail.co"
+        },
+        "NotProperEmailJoiValidation":{
+            "email": "singh.mr.1996gmail.com"
+        },
+        "NotProperEmailJoiValidationAtListTwo":{
+            "email": "s@gmail.com"
+        },
+        "EmailNotExits":{
+            "email": "notexistelaim@gmail.com"
         }
     }
 }
