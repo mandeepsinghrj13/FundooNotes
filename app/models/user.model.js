@@ -23,6 +23,10 @@ const userSchema = mongoose.Schema(
       required: true,
       minlength: 8,
     },
+    resetLink: {
+      data: String,
+      default: "",
+    },
   },
   {
     timestamps: true,
@@ -70,5 +74,22 @@ class userModel {
       return callback("Internal Error", null);
     }
   };
+  // forgetPassword checking into database usingh findeOne() email there or not
+
+  forgetPassword = (userDetails, callback) => {
+    try {
+      user.findOne({ email: userDetails.email }, (err, data) => {
+        if (err || !data) {
+          return callback(err + "invalid email", null);
+        } else {
+          return callback(null, data);
+        }
+      });
+    } catch (error) {
+      logger.error("Internal Error");
+      return callback("Internal Error", null);
+    }
+  };
 }
+
 module.exports = new userModel();

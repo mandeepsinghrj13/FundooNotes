@@ -3,6 +3,7 @@ const userModel = require("../models/user.model.js");
 const bcrypt = require("bcrypt");
 const helper = require("../Utility/helper");
 const logger = require("../Utility/logger.js");
+const mailUser = require("../Utility/nodemailer");
 // creating a class
 class UserService {
   // registraion for new user register
@@ -42,6 +43,19 @@ class UserService {
         return callback(
           err + "invalid login info , please enter valid login info"
         );
+      }
+    });
+  };
+
+  // forgetPassword
+  forgetPassword = (user, callback) => {
+    userModel.forgetPassword(user, (err, data) => {
+      if (err || !data) {
+        console.log("email not in database");
+        return callback(err, null);
+      } else {
+        console.log("gnerate token and send email");
+        return callback(null, mailUser.sendEmail(data));
       }
     });
   };

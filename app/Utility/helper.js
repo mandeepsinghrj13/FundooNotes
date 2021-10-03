@@ -16,15 +16,15 @@ class Helper {
 
   jwtTokenGenerate = (data, callback) => {
     jwt.sign(
-      { id: data._id, firstName: data.firstName, lastName: data.lastName },
+      { email: data.email, firstName: data.firstName, lastName: data.lastName },
       process.env.SECRET_KEY,
-      (err, token) => {
+      (err, data) => {
         if (err) {
           logger.error("token not generated");
           return callback("token not generated", null);
         } else {
           logger.info("token  generated");
-          return callback(null, token);
+          return callback(null, data);
         }
       }
     );
