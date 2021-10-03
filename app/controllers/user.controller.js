@@ -110,13 +110,26 @@ class Controller {
       const user = {
         email: req.body.email,
       };
+
+      // forgetPassword validation
+      const validationforgetPassword =
+        validation.authUserforgetPassword.validate(user);
+
+      if (validationforgetPassword.error) {
+        logger.error("Wrong Input Validations");
+        return res.status(400).send({
+          success: false,
+          message: "Wrong Input Validations",
+          data: validationforgetPassword,
+        });
+      }
       // userService.forgetPassword heat on user.service.js file
       userService.forgetPassword(user, (error, data) => {
         if (error) {
           logger.error("email not Exist");
           return res.status(409).json({
             success: false,
-            message: "email not send",
+            message: "email not Exist",
           });
         } else {
           logger.info("email send Successfully");

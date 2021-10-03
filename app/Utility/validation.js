@@ -47,5 +47,16 @@ class Validation {
       )
       .required(),
   });
+
+  // valdation forgetPassword req.body
+  authUserforgetPassword = Joi.object({
+    email: Joi.string()
+      .pattern(
+        new RegExp(
+          "^[a-zA-z]{2}([+-_ .]*[a-zA-Z0-9]+)*[@][a-zA-z0-9]+(.[a-z]{2,3})*$"
+        )
+      )
+      .required(),
+  });
 }
 module.exports = new Validation();
