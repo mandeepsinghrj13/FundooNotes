@@ -87,9 +87,40 @@
                 }
             }
         }
-    }
+    },
 
-    
+    "/forgetPassword": {
+        "put": {
+            "tags": ["forgetPassword"],
+            "description": "forgetPassword user",
+            "parameters": [
+                {
+                    "name": "ForgetPassword",
+                    "in": "body",
+                    "description": "user send email for forgetPassword",
+                    "schema": {
+                        "$ref": "#/definitions/forgetPasswordUser"
+                    }
+                }
+            ],
+
+            "produces": ["application/json"],
+            "responses": {
+                "201": {
+                    "description": "email send Successfully"
+                },
+                "400": {
+                    "description": "Wrong Input Validations"
+                },
+                "409": {
+                    "description": "email not Exist"
+                },
+                "500": {
+                    "description": "server-error"
+                }
+            }
+        }
+    }
 },
     "definitions": {
         "registerUser": {        
@@ -118,7 +149,15 @@
                     "type": "string"
                 }
             }
+        },
+        "forgetPasswordUser": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                }
+                
+            }
         }
-        
     }
 }
