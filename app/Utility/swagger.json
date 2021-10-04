@@ -90,7 +90,7 @@
     },
 
     "/forgetPassword": {
-        "put": {
+        "post": {
             "tags": ["forgetPassword"],
             "description": "forgetPassword user",
             "parameters": [

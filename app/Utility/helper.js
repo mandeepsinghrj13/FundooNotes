@@ -2,6 +2,7 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const logger = require("./logger");
+require("dotenv").config();
 class Helper {
   hashing = (password, callback) => {
     bcrypt.hash(password, 10, (err, hashpassword) => {
@@ -14,20 +15,12 @@ class Helper {
     });
   };
 
-  jwtTokenGenerate = (data, callback) => {
-    jwt.sign(
-      { email: data.email, firstName: data.firstName, lastName: data.lastName },
-      process.env.SECRET_KEY,
-      (err, data) => {
-        if (err) {
-          logger.error("token not generated");
-          return callback(err, null);
-        } else {
-          logger.info("token  generated");
-          return callback(null, data);
-        }
-      }
-    );
+  jwtTokenGenerate = (data) => {
+    const dataForToken = {
+      email: data.email,
+      Password: data.Password,
+    };
+    return jwt.sign(dataForToken, process.env.SECRET_KEY, { expiresIn: "1H" });
   };
 }
 module.exports = new Helper();

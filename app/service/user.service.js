@@ -17,32 +17,24 @@ class UserService {
     });
   };
 
-  // login and compare password from user and database
+  // loginUser
   loginUser = (user, callback) => {
+    // call user.model.js file
     userModel.loginUser(user, (err, data) => {
-      if (data) {
-        // compare both password
-        bcrypt.compare(user.Password, data.Password, (err, databaseData) => {
-          if (!databaseData) {
-            logger.error("invalid password");
-            return callback(err, null);
-          } else {
-            helper.jwtTokenGenerate(data, (err, token) => {
-              if (token) {
-                return callback(null, token);
-              } else {
-                throw err;
-              }
-            });
-          }
-        });
+      if (err) {
+        logger.error(" Error");
+        return callback(err, null);
       } else {
-        logger.error(
-          "invalid login info , please enter valid email or password login info"
-        );
-        return callback(
-          err + "invalid login info , please enter valid login info"
-        );
+        // compare both password
+        const result = bcrypt.compareSync(user.Password, data.Password);
+        if (result) {
+          const token = helper.jwtTokenGenerate(data);
+          logger.info("Valid Password And Generate Jwt Token");
+          return callback(null, token);
+        } else {
+          logger.error("invalid password");
+          return callback("invalid password", null);
+        }
       }
     });
   };

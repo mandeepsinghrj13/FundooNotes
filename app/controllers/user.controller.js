@@ -64,6 +64,7 @@ class Controller {
         email: req.body.email,
         Password: req.body.Password,
       };
+
       // loging validation
       const validationLogin = validation.authUserLogin.validate(userLogin);
 
@@ -78,28 +79,24 @@ class Controller {
       // userService.loginUser heat on user.service.js file
       userService.loginUser(userLogin, (error, data) => {
         if (error) {
-          logger.error("user login failed");
-          return res.status(400).json({
+          logger.error("User Login Failed");
+          return res.status(400).send({
             success: false,
             message: "User login failed",
-            // data: data,
-          });
-        } else {
-          logger.info("loging successfully");
-          res.status(200).json({
-            success: true,
-            // data: data,
-            message: "loging successfully",
-            token: data,
           });
         }
+        logger.info("Loging successfully");
+        return res.status(200).send({
+          success: true,
+          message: "Loging successfully",
+          token: data,
+        });
       });
-    } catch (error) {
+    } catch (err) {
       logger.error("server-error");
-      return res.status(500).json({
+      return res.status(500).send({
         success: false,
-        // data: null,
-        message: "server-error",
+        message: "server error",
       });
     }
   }; // login end
@@ -126,13 +123,13 @@ class Controller {
       // userService.forgetPassword heat on user.service.js file
       userService.forgetPassword(user, (error, data) => {
         if (error) {
-          logger.error("email not Exist");
+          logger.error("Email Not Exist");
           return res.status(409).json({
             success: false,
-            message: "email not Exist",
+            message: "Email Not Exist",
           });
         } else {
-          logger.info("email send Successfully");
+          logger.info("Email Send Successfully");
           res.status(201).json({
             success: true,
             message: "email send successfully",

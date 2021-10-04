@@ -61,25 +61,28 @@ class userModel {
 
   // login
   loginUser = (userDetails, callback) => {
-    try {
-      user.findOne({ email: userDetails.email }, (err, data) => {
+    user.findOne({ email: userDetails.email }, (error, data) => {
+      if (error) {
+        logger.error("Error loggin user");
+        return callback(error, null);
+      } else {
         if (!data) {
-          return callback(err, null);
+          logger.error("Invalid User");
+          return callback(error, null);
         } else {
+          logger.info("Email id found");
           return callback(null, data);
         }
-      });
-    } catch (error) {
-      logger.error("Internal Error");
-      return callback(error, null);
-    }
+      }
+    });
   };
-  // forgetPassword checking into database usingh findeOne() email there or not
 
+  // forgetPassword checking into database usingh findeOne() email there or not
   forgetPassword = (userDetails, callback) => {
     try {
       user.findOne({ email: userDetails.email }, (err, data) => {
-        if (err) {
+        if (!data) {
+          logger.error("email not Exist");
           return callback(err, null);
         } else {
           return callback(null, data);

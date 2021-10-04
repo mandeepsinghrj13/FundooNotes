@@ -101,7 +101,7 @@
             "email": "singh.mr.1996@gmail.com"
         },
         "NotProperEmail":{
-            "email": "singh.mr.1996@gmail.co"
+            "email": "singh@gmail.com"
         },
         "NotProperEmailJoiValidation":{
             "email": "singh.mr.1996gmail.com"
@@ -110,7 +110,7 @@
             "email": "s@gmail.com"
         },
         "EmailNotExits":{
-            "email": "notexistelaim@gmail.com"
+            "email": " "
         }
     }
 }
