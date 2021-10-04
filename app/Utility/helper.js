@@ -7,7 +7,7 @@ class Helper {
     bcrypt.hash(password, 10, (err, hashpassword) => {
       if (err) {
         logger.error("error is hashing");
-        return callback("error is hashing", null);
+        return callback(err, null);
       } else {
         return callback(null, hashpassword);
       }
@@ -21,7 +21,7 @@ class Helper {
       (err, data) => {
         if (err) {
           logger.error("token not generated");
-          return callback("token not generated", null);
+          return callback(err, null);
         } else {
           logger.info("token  generated");
           return callback(null, data);

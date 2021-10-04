@@ -64,14 +64,14 @@ class userModel {
     try {
       user.findOne({ email: userDetails.email }, (err, data) => {
         if (!data) {
-          return callback(err + "invalid email", null);
+          return callback(err, null);
         } else {
           return callback(null, data);
         }
       });
     } catch (error) {
       logger.error("Internal Error");
-      return callback("Internal Error", null);
+      return callback(error, null);
     }
   };
   // forgetPassword checking into database usingh findeOne() email there or not
@@ -79,15 +79,15 @@ class userModel {
   forgetPassword = (userDetails, callback) => {
     try {
       user.findOne({ email: userDetails.email }, (err, data) => {
-        if (err || !data) {
-          return callback(err + "invalid email", null);
+        if (err) {
+          return callback(err, null);
         } else {
           return callback(null, data);
         }
       });
     } catch (error) {
       logger.error("Internal Error");
-      return callback("Internal Error", null);
+      return callback(error, null);
     }
   };
 }

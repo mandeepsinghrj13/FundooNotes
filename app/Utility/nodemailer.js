@@ -3,10 +3,6 @@ const auth = require("./email_token_send");
 require("dotenv").config();
 exports.sendEmail = (data) => {
   const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 587,
-    secure: false,
-    requireTLS: true,
     service: "gmail",
     auth: {
       user: process.env.Email,

@@ -4,5 +4,5 @@ module.exports = (app) => {
   // Create a new Note
   app.post("/register", controller.register);
   app.post("/login", controller.login);
-  app.put("/forgetPassword", controller.forgetPassword);
+  app.post("/forgetPassword", controller.forgetPassword);
 };

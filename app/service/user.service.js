@@ -25,7 +25,7 @@ class UserService {
         bcrypt.compare(user.Password, data.Password, (err, databaseData) => {
           if (!databaseData) {
             logger.error("invalid password");
-            return callback(err + "invalid password", null);
+            return callback(err, null);
           } else {
             helper.jwtTokenGenerate(data, (err, token) => {
               if (token) {
@@ -50,11 +50,10 @@ class UserService {
   // forgetPassword
   forgetPassword = (user, callback) => {
     userModel.forgetPassword(user, (err, data) => {
-      if (err || !data) {
-        console.log("email not in database");
+      if (err) {
+        logger.error("email not in database");
         return callback(err, null);
       } else {
-        console.log("gnerate token and send email");
         return callback(null, mailUser.sendEmail(data));
       }
     });
