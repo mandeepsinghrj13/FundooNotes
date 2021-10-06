@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 /* eslint-disable no-undef */
 /* eslint-disable node/handle-callback-err */
 const userService = require("../service/user.service.js");
@@ -122,17 +123,19 @@ class Controller {
       }
       // userService.forgetPassword heat on user.service.js file
       userService.forgetPassword(user, (error, data) => {
-        if (error) {
+        if (data === null) {
           logger.error("Email Not Exist");
           return res.status(409).json({
             success: false,
             message: "Email Not Exist",
+            error,
           });
         } else {
           logger.info("Email Send Successfully");
-          res.status(201).json({
+          res.status(200).json({
             success: true,
             message: "email send successfully",
+            data,
           });
         }
       });
@@ -142,6 +145,37 @@ class Controller {
         success: false,
         data: null,
         message: "server-error",
+      });
+    }
+  };
+
+  resetPassword = (req, res) => {
+    try {
+      const { token } = req.params;
+      console.log("inside control");
+      const userData = {
+        token: token,
+        Password: req.body.Password,
+        confirmPassword: req.body.Password,
+      };
+      userService.passwordReset(userData, (error, data) => {
+        if (error) {
+          res.status(400).send({
+            sucess: false,
+            message: error,
+          });
+        } else {
+          res.status(200).send({
+            success: true,
+            message: "Your password has been reset successfully!!",
+            data,
+          });
+        }
+      });
+    } catch (error) {
+      return res.status(500).send({
+        sucess: false,
+        message: error.message,
       });
     }
   };

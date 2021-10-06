@@ -63,7 +63,7 @@
         },
         "loginWrongPassword": {
             "email": "mdeepsinghh@gmail.com",
-            "Password": "Deepsinghh@123"
+            "Password": ""
         },
         "loginWithoutPassword": {
             "email": "mdeepsinghh@gmail.com"

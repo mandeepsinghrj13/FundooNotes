@@ -3,6 +3,8 @@
 const mongoose = require("mongoose");
 const helper = require("../Utility/helper");
 const logger = require("../Utility/logger");
+const bcrypt = require("bcrypt");
+// const { data } = require("../Utility/logger");
 const userSchema = mongoose.Schema(
   {
     firstName: {
@@ -23,9 +25,9 @@ const userSchema = mongoose.Schema(
       required: true,
       minlength: 8,
     },
-    resetLink: {
-      data: String,
-      default: "",
+    confirmPassword: {
+      type: String,
+      required: true,
     },
   },
   {
@@ -90,6 +92,39 @@ class userModel {
       });
     } catch (error) {
       logger.error("Internal Error");
+      return callback(error, null);
+    }
+  };
+
+  updatePassword = (inputData, callback) => {
+    try {
+      user.findOne({ email: inputData.email }, (err, data) => {
+        console.log(data.id, "inside model");
+
+        if (data) {
+          bcrypt.hash(inputData.Password, 10, (error, hashPassword) => {
+            if (hashPassword) {
+              console.log(hashPassword, "hash");
+              user.findByIdAndUpdate(
+                data.id,
+                { Password: hashPassword },
+                (error, data) => {
+                  if (error) {
+                    return callback(error, null);
+                  } else {
+                    return callback(null, data);
+                  }
+                }
+              );
+            } else {
+              return callback(error, null);
+            }
+          });
+        } else {
+          return callback(err, null);
+        }
+      });
+    } catch (error) {
       return callback(error, null);
     }
   };

@@ -1,6 +1,7 @@
 const nodemailer = require("nodemailer");
 const auth = require("../Utility/helper");
 const logger = require("./logger");
+// const jwt = require("jsonwebtoken");
 require("dotenv").config();
 exports.sendEmail = (data) => {
   const transporter = nodemailer.createTransport({
@@ -12,12 +13,14 @@ exports.sendEmail = (data) => {
   });
   logger.info("Jwt Token Generate");
   const token = auth.jwtTokenGenerate(data);
+
   const mailOptions = {
     from: process.env.Email,
     to: data.email,
     subject: "Reset password Link",
     html: `
-    
+    <h2>please click on this link to change your password</h2>
+    <p>${process.env.CLIENT_URL}/resetpassword/${token}</p>
     <a href="${process.env.CLIENT_URL}/resetpassword/${token}"><h2>please click on this link to change your password</h2></a>
                 `,
   };
