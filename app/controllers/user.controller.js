@@ -7,9 +7,9 @@ const validation = require("../Utility/validation.js");
 // creating a class Controller
 class Controller {
   /**
-   *
+   *register
    * @param {request} req
-   * @param {Response} res
+   * @param {response} res
    * @returns
    */
   register = (req, res) => {
@@ -38,12 +38,13 @@ class Controller {
           return res.status(409).json({
             success: false,
             message: "Already exist User",
+            error,
           });
         } else {
           logger.info("User Data Inserted Successfully");
           res.status(201).json({
             success: true,
-            // data: data,
+            data: data,
             message: "User Data Inserted successfully",
           });
         }
@@ -102,7 +103,12 @@ class Controller {
     }
   }; // login end
 
-  // forget password
+  /**
+   * forgetpassword
+   * @param {*} req
+   * @param {*} res
+   * @returns
+   */
   forgetPassword = (req, res) => {
     try {
       const user = {
@@ -149,35 +155,76 @@ class Controller {
     }
   };
 
+  /**
+   * reset password
+   * @param {*} req
+   * @param {*} res
+   * @returns
+   */
   resetPassword = (req, res) => {
     try {
-      const { token } = req.params;
-      console.log("inside control");
-      const userData = {
+      // const {id} = req.params;
+      const header = req.headers.authorization;
+
+      const myArr = header.split(" ");
+      console.log("head: " + header);
+      const token = myArr[1];
+      const resetInfo = {
         token: token,
-        Password: req.body.Password,
-        confirmPassword: req.body.Password,
+        newPassword: req.body.Password,
       };
-      userService.passwordReset(userData, (error, data) => {
-        if (error) {
-          res.status(400).send({
-            sucess: false,
-            message: error,
+      userService.resetPassword(resetInfo, (error, data) => {
+        if (data) {
+          logger.info("Password reset");
+          return res.status(200).json({
+            success: true,
+            message: "Password reset",
           });
         } else {
-          res.status(200).send({
-            success: true,
-            message: "Your password has been reset successfully!!",
-            data,
+          logger.error(error);
+          return res.status(403).json({
+            success: false,
+            message: error,
           });
         }
       });
     } catch (error) {
-      return res.status(500).send({
-        sucess: false,
-        message: error.message,
+      return res.status(500).json({
+        success: false,
+        data: null,
+        message: "server-error",
       });
     }
   };
+  // resetPassword = (req, res) => {
+  //   try {
+  //     const { token } = req.params;
+  //     console.log("inside control");
+  //     const userData = {
+  //       token: token,
+  //       Password: req.body.Password,
+  //       confirmPassword: req.body.Password,
+  //     };
+  //     userService.passwordReset(userData, (error, data) => {
+  //       if (error) {
+  //         res.status(400).send({
+  //           sucess: false,
+  //           message: error,
+  //         });
+  //       } else {
+  //         res.status(200).send({
+  //           success: true,
+  //           message: "Your password has been reset successfully!!",
+  //           // data,
+  //         });
+  //       }
+  //     });
+  //   } catch (error) {
+  //     return res.status(500).send({
+  //       sucess: false,
+  //       message: error.message,
+  //     });
+  //   }
+  // };
 }
 module.exports = new Controller();

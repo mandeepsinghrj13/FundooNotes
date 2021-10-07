@@ -2,7 +2,6 @@
 const userModel = require("../models/user.model.js");
 const bcrypt = require("bcrypt");
 const helper = require("../Utility/helper");
-// const helpern = require("../Utility/nodemailer");
 const logger = require("../Utility/logger.js");
 const mailUser = require("../Utility/nodemailer");
 // creating a class
@@ -52,26 +51,40 @@ class UserService {
     });
   };
 
-  passwordReset = (userInput, callback) => {
-    try {
-      const email = helper.getEmailFromToken(userInput.token);
-      const inputData = {
-        email: email,
-        Password: userInput.Password,
-      };
-
-      userModel.updatePassword(inputData, (error, data) => {
-        if (error) {
-          logger.error("Some error occured while updating password", error);
-          callback(error, null);
-        } else {
-          logger.info("Password has been reset successfully", data);
-          callback(null, data);
-        }
-      });
-    } catch (error) {
-      return callback(error, null);
-    }
+  /**
+   * resetpassword
+   * @param {*} resetInfo
+   * @param {*} callback
+   */
+  resetPassword = (resetInfo, callback) => {
+    userModel.resetPassword(resetInfo, (error, data) => {
+      if (data) {
+        return callback(null, data);
+      } else {
+        return callback(error, null);
+      }
+    });
   };
+  // passwordReset = (userInput, callback) => {
+  //   try {
+  //     const email = helper.getEmailFromToken(userInput.token);
+  //     const inputData = {
+  //       email: email,
+  //       Password: userInput.Password,
+  //     };
+
+  //     userModel.updatePassword(inputData, (error, data) => {
+  //       if (error) {
+  //         logger.error("Some error occured while updating password", error);
+  //         callback(error, null);
+  //       } else {
+  //         logger.info("Password has been reset successfully", data);
+  //         callback(null, data);
+  //       }
+  //     });
+  //   } catch (error) {
+  //     return callback(error, null);
+  //   }
+  // };
 }
 module.exports = new UserService();

@@ -14,6 +14,9 @@ exports.sendEmail = (data) => {
   logger.info("Jwt Token Generate");
   const token = auth.jwtTokenGenerate(data);
 
+  /**
+   * show in email
+   */
   const mailOptions = {
     from: process.env.Email,
     to: data.email,
@@ -25,6 +28,9 @@ exports.sendEmail = (data) => {
                 `,
   };
 
+  /**
+   * send email
+   */
   transporter.sendMail(mailOptions, (err, info) => {
     if (err) {
       console.log(err);

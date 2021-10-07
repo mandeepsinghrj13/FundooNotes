@@ -3,8 +3,6 @@
 const mongoose = require("mongoose");
 const helper = require("../Utility/helper");
 const logger = require("../Utility/logger");
-const bcrypt = require("bcrypt");
-// const { data } = require("../Utility/logger");
 const userSchema = mongoose.Schema(
   {
     firstName: {
@@ -25,10 +23,10 @@ const userSchema = mongoose.Schema(
       required: true,
       minlength: 8,
     },
-    confirmPassword: {
-      type: String,
-      required: true,
-    },
+    // confirmPassword: {
+    //   type: String,
+    //   required: true,
+    // },
   },
   {
     timestamps: true,
@@ -62,6 +60,11 @@ class userModel {
   };
 
   // login
+  /**
+   * loginuser
+   * @param {*} userDetails
+   * @param {*} callback
+   */
   loginUser = (userDetails, callback) => {
     user.findOne({ email: userDetails.email }, (error, data) => {
       if (error) {
@@ -80,6 +83,12 @@ class userModel {
   };
 
   // forgetPassword checking into database usingh findeOne() email there or not
+  /**
+   * forgetpassword
+   * @param {*} userDetails
+   * @param {*} callback
+   * @returns
+   */
   forgetPassword = (userDetails, callback) => {
     try {
       user.findOne({ email: userDetails.email }, (err, data) => {
@@ -96,38 +105,71 @@ class userModel {
     }
   };
 
-  updatePassword = (inputData, callback) => {
-    try {
-      user.findOne({ email: inputData.email }, (err, data) => {
-        console.log(data.id, "inside model");
-
-        if (data) {
-          bcrypt.hash(inputData.Password, 10, (error, hashPassword) => {
-            if (hashPassword) {
-              console.log(hashPassword, "hash");
-              user.findByIdAndUpdate(
-                data.id,
-                { Password: hashPassword },
-                (error, data) => {
-                  if (error) {
-                    return callback(error, null);
-                  } else {
-                    return callback(null, data);
-                  }
+  /**
+   * resetpassword
+   * @param {*} resetInfo
+   * @param {*} callback
+   */
+  resetPassword = (resetInfo, callback) => {
+    // Password Hashed
+    helper.hashing(resetInfo.newPassword, (err, hashedPassword) => {
+      if (err) {
+        throw err;
+      } else {
+        helper.decodeToken(resetInfo.token, (error, data) => {
+          if (data) {
+            user.findByIdAndUpdate(
+              data.id,
+              { Password: hashedPassword },
+              (error, data) => {
+                if (data) {
+                  logger.info("Password Updated successfully");
+                  return callback(null, data);
+                } else {
+                  logger.info(error);
+                  return callback(error, null);
                 }
-              );
-            } else {
-              return callback(error, null);
-            }
-          });
-        } else {
-          return callback(err, null);
-        }
-      });
-    } catch (error) {
-      return callback(error, null);
-    }
+              }
+            );
+          } else {
+            return callback(error, null);
+          }
+        });
+      }
+    });
   };
+  // updatePassword = (inputData, callback) => {
+  //   try {
+  //     user.findOne({ email: inputData.email }, (err, data) => {
+  //       console.log(data.id, "inside model");
+
+  //       if (data) {
+  //         bcrypt.hash(inputData.Password, 10, (error, hashPassword) => {
+  //           if (hashPassword) {
+  //             console.log(hashPassword, "hash");
+  //             user.findByIdAndUpdate(
+  //               data.id,
+  //               { Password: hashPassword },
+  //               (error, data) => {
+  //                 if (error) {
+  //                   return callback(error, null);
+  //                 } else {
+  //                   return callback(null, data);
+  //                 }
+  //               }
+  //             );
+  //           } else {
+  //             return callback(error, null);
+  //           }
+  //         });
+  //       } else {
+  //         return callback(err, null);
+  //       }
+  //     });
+  //   } catch (error) {
+  //     return callback(error, null);
+  //   }
+  // };
 }
 
 module.exports = new userModel();

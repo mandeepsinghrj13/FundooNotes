@@ -3,11 +3,10 @@ const helper = require("../Utility/helper");
 module.exports = (app) => {
   // Create a new Node
   app.post("/register", controller.register);
+  // Post login
   app.post("/login", controller.login);
+  // Post forgetpassword
   app.post("/forgetPassword", controller.forgetPassword);
-  app.put(
-    "/resetPassword/:token",
-    helper.verifyingToken,
-    controller.resetPassword
-  );
+  // Post resetpassword
+  app.post("/resetpassword", helper.verifyToken, controller.resetPassword);
 };
