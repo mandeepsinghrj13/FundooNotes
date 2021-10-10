@@ -98,7 +98,7 @@
     },
     "forgetpassworduser":{
         "ProperEmail":{
-            "email": "singh.mr.1996@gmail.com"
+            "email": "mandeep.test1996@gmail.com"
         },
         "NotProperEmail":{
             "email": "singh@gmail.com"

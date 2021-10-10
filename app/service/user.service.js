@@ -65,26 +65,5 @@ class UserService {
       }
     });
   };
-  // passwordReset = (userInput, callback) => {
-  //   try {
-  //     const email = helper.getEmailFromToken(userInput.token);
-  //     const inputData = {
-  //       email: email,
-  //       Password: userInput.Password,
-  //     };
-
-  //     userModel.updatePassword(inputData, (error, data) => {
-  //       if (error) {
-  //         logger.error("Some error occured while updating password", error);
-  //         callback(error, null);
-  //       } else {
-  //         logger.info("Password has been reset successfully", data);
-  //         callback(null, data);
-  //       }
-  //     });
-  //   } catch (error) {
-  //     return callback(error, null);
-  //   }
-  // };
 }
 module.exports = new UserService();

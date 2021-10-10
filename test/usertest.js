@@ -1,5 +1,6 @@
 const server = require("../server");
 const chai = require("chai");
+const faker = require("faker");
 const chaiHttp = require("chai-http");
 const userInputs = require("./usertest.json");
 chai.should();
@@ -16,24 +17,29 @@ describe("registration for positive and negative ", () => {
    * it function for registration when key and value is proper with regex validation .
    *
    * */
-  // it.skip("GivenRegistrationDetails_WhenProper_UserRegistered_Successfully", (done) => {
-  //   const registrationDetails = userInputs.user.registration;
-  //   chai
-  //     .request(server)
-  //     .post("/register")
-  //     .send(registrationDetails)
-  //     .end((err, res) => {
-  //       if (err) {
-  //         return done(err);
-  //       }
-  //       res.should.have.status(201);
-  //       res.body.should.have.property("success").eql(true);
-  //       res.body.should.have
-  //         .property("message")
-  //         .eql("User Data Inserted successfully");
-  //       done();
-  //     });
-  // });
+  it("GivenRegistrationDetails_WhenProper_UserRegistered_Successfully", (done) => {
+    const registrationDetails = {
+      firstName: faker.name.firstName(),
+      lastName: faker.name.firstName(),
+      email: faker.internet.email(),
+      Password: "Password@1234",
+    };
+    chai
+      .request(server)
+      .post("/register")
+      .send(registrationDetails)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        res.should.have.status(201);
+        res.body.should.have.property("success").eql(true);
+        res.body.should.have
+          .property("message")
+          .eql("User Data Inserted successfully");
+        done();
+      });
+  });
   it("GivenRegistrationDetails_WhenProper_UserRegistered_Already Exist", (done) => {
     const registrationDetails = userInputs.user.registration;
     chai
@@ -426,20 +432,20 @@ describe("forgetpassword for positive and negative ", () => {
   /**
    * it function for forgetpassword when email was proper with regex validation .
    */
-  // it("GivenForgetPasswordDetails_WhenProper_UserEmail_Successfully", (done) => {
-  //   const forgetPasswordDetails = userInputs.forgetpassworduser.ProperEmail;
-  //   chai
-  //     .request(server)
-  //     .post("/forgetPassword")
-  //     .send(forgetPasswordDetails)
-  //     .end((err, res) => {
-  //       if (err) {
-  //         return done(err);
-  //       }
-  //       res.should.have.status(200);
-  //       done();
-  //     });
-  // });
+  it("GivenForgetPasswordDetails_WhenProper_UserEmail_Successfully", (done) => {
+    const forgetPasswordDetails = userInputs.forgetpassworduser.ProperEmail;
+    chai
+      .request(server)
+      .post("/forgetPassword")
+      .send(forgetPasswordDetails)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        res.should.have.status(200);
+        done();
+      });
+  });
   /**
    * it function for forgetpassword when email not proper user email with regex validation .
    */

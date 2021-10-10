@@ -3,6 +3,7 @@
 const mongoose = require("mongoose");
 const helper = require("../Utility/helper");
 const logger = require("../Utility/logger");
+// const bcrypt = require("bcrypt");
 const userSchema = mongoose.Schema(
   {
     firstName: {
@@ -23,10 +24,6 @@ const userSchema = mongoose.Schema(
       required: true,
       minlength: 8,
     },
-    // confirmPassword: {
-    //   type: String,
-    //   required: true,
-    // },
   },
   {
     timestamps: true,
@@ -111,65 +108,26 @@ class userModel {
    * @param {*} callback
    */
   resetPassword = (resetInfo, callback) => {
-    // Password Hashed
     helper.hashing(resetInfo.newPassword, (err, hashedPassword) => {
       if (err) {
         throw err;
       } else {
-        helper.decodeToken(resetInfo.token, (error, data) => {
-          if (data) {
-            user.findByIdAndUpdate(
-              data.id,
-              { Password: hashedPassword },
-              (error, data) => {
-                if (data) {
-                  logger.info("Password Updated successfully");
-                  return callback(null, data);
-                } else {
-                  logger.info(error);
-                  return callback(error, null);
-                }
-              }
-            );
-          } else {
-            return callback(error, null);
+        user.findByIdAndUpdate(
+          resetInfo.id,
+          { Password: hashedPassword },
+          (error, data) => {
+            if (data) {
+              logger.info("Password Reset successfully");
+              return callback(null, data);
+            } else {
+              logger.info(error);
+              return callback(error, null);
+            }
           }
-        });
+        );
       }
     });
   };
-  // updatePassword = (inputData, callback) => {
-  //   try {
-  //     user.findOne({ email: inputData.email }, (err, data) => {
-  //       console.log(data.id, "inside model");
-
-  //       if (data) {
-  //         bcrypt.hash(inputData.Password, 10, (error, hashPassword) => {
-  //           if (hashPassword) {
-  //             console.log(hashPassword, "hash");
-  //             user.findByIdAndUpdate(
-  //               data.id,
-  //               { Password: hashPassword },
-  //               (error, data) => {
-  //                 if (error) {
-  //                   return callback(error, null);
-  //                 } else {
-  //                   return callback(null, data);
-  //                 }
-  //               }
-  //             );
-  //           } else {
-  //             return callback(error, null);
-  //           }
-  //         });
-  //       } else {
-  //         return callback(err, null);
-  //       }
-  //     });
-  //   } catch (error) {
-  //     return callback(error, null);
-  //   }
-  // };
 }
 
 module.exports = new userModel();

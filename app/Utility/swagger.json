@@ -156,7 +156,6 @@
                 "email": {
                     "type": "string"
                 }
-                
             }
         }
     }
