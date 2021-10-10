@@ -117,7 +117,6 @@ class userModel {
           { Password: hashedPassword },
           (error, data) => {
             if (data) {
-              logger.info("Password Reset successfully");
               return callback(null, data);
             } else {
               logger.info(error);

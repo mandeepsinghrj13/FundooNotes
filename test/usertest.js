@@ -3,6 +3,7 @@ const chai = require("chai");
 const faker = require("faker");
 const chaiHttp = require("chai-http");
 const userInputs = require("./usertest.json");
+// const error  = require("../app/Utility/logger");
 chai.should();
 chai.use(chaiHttp);
 /**
@@ -432,7 +433,7 @@ describe("forgetpassword for positive and negative ", () => {
   /**
    * it function for forgetpassword when email was proper with regex validation .
    */
-  it("GivenForgetPasswordDetails_WhenProper_UserEmail_Successfully", (done) => {
+  it.skip("GivenForgetPasswordDetails_WhenProper_UserEmail_Successfully", (done) => {
     const forgetPasswordDetails = userInputs.forgetpassworduser.ProperEmail;
     chai
       .request(server)
@@ -515,6 +516,70 @@ describe("forgetpassword for positive and negative ", () => {
           return done(err);
         }
         res.should.have.status(400);
+        done();
+      });
+  });
+});
+
+describe("resetpassword for positive and negative ", () => {
+  /**
+   * it function for resetpassword when proper password successfully reset .
+   */
+  it("GivenResetPasswordDetails_WhenProper_Password_Successfully_Reset", (done) => {
+    const resetPasswordDetails = userInputs.reset.resetPassword;
+    const token = userInputs.reset.tokenOne;
+    chai
+      .request(server)
+      .post("/resetpassword")
+      .set({ authorization: token })
+      .send(resetPasswordDetails)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        res.should.have.status(200);
+        res.body.should.have.property("success").eql(true);
+        res.body.should.have
+          .property("message")
+          .eql("Password reset succesfully");
+        done();
+      });
+  });
+  /**
+   * it function for resetpassword when token has expiered or wrong .
+   */
+  it("GivenResetPasswordDetails_When_Token_Has_Expiered_Or_Wrong", (done) => {
+    const resetPasswordDetails = userInputs.reset.resetPassword;
+    const token = userInputs.reset.tokenTwoInvaild;
+    chai
+      .request(server)
+      .post("/resetpassword")
+      .set({ authorization: token })
+      .send(resetPasswordDetails)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        res.should.have.status(401);
+        done();
+      });
+  });
+  /**
+   * it function for resetpassword when token arrayofindex wrong .
+   */
+  it("GivenResetPasswordDetails_When_Token_ArrayOfIndex_Wrong", (done) => {
+    const resetPasswordDetails = userInputs.reset.resetPassword;
+    const token = userInputs.reset.tokenInvaild;
+    chai
+      .request(server)
+      .post("/resetpassword")
+      .set({ authorization: token })
+      .send(resetPasswordDetails)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        res.should.have.status(401);
         done();
       });
   });
