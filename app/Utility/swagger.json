@@ -120,6 +120,47 @@
                 }
             }
         }
+    },
+
+    "/resetpassword": {
+        "post": {
+            "tags": [
+                "reset password"
+            ],
+            "description": "Already registered ? Then reset password successfully !!",
+            "parameters": [
+                {
+                    "name": "Authorization",
+                    "in": "header",
+                    "description": "token for validation",
+                    "schema": {
+                        "type": "string"
+                    }
+                },
+                {
+                    "name": "Reset Password",
+                    "in": "body",
+                    "description": "Reset Password with token",
+                    "schema": {
+                        "$ref": "#/definitions/resetPassword"
+                    }
+                }
+            ],
+            "produces": [
+                "application/json"
+            ],
+            "responses": {
+                "200": {
+                    "description": "Password reset succesfully"
+                },
+                "401": {
+                    "description": "Unautheried"
+                },
+                "500": {
+                    "description": "server-error"
+                }
+            }
+        }
     }
 },
     "definitions": {
@@ -156,6 +197,18 @@
                 "email": {
                     "type": "string"
                 }
+            }
+        },
+        "resetPassword": {
+            "type": "object",
+            "properties": {
+                "Password": {
+                    "type": "string",
+                    "description": "create new password for user."
+                }
+            },
+            "example": {
+                "Password": "Password@1234"
             }
         }
     }
