@@ -19,7 +19,7 @@ class Helper {
       email: data.email,
       id: data.id,
     };
-    return jwt.sign(dataForToken, process.env.SECRET_KEY, { expiresIn: "2H" });
+    return jwt.sign(dataForToken, process.env.SECRET_KEY, { expiresIn: "24H" });
   };
 
   /**

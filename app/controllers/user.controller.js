@@ -168,6 +168,18 @@ class Controller {
         id: req.userData.id,
         newPassword: req.body.Password,
       };
+      // check validation user body
+      const validationforgetPassword =
+        validation.authUserresetPassword.validate(resetInfo);
+
+      if (validationforgetPassword.error) {
+        logger.error("Wrong Input Validations");
+        return res.status(400).json({
+          success: false,
+          message: "Wrong Input Validations",
+          data: validationforgetPassword,
+        });
+      }
       userService.resetPassword(resetInfo, (error, data) => {
         if (data) {
           logger.info("Password reset succesfully");

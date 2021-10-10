@@ -58,5 +58,17 @@ class Validation {
       )
       .required(),
   });
+
+  authUserresetPassword = Joi.object({
+    email: Joi.string().required(),
+    id: Joi.string().required(),
+    newPassword: Joi.string()
+      .pattern(
+        new RegExp(
+          "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$"
+        )
+      )
+      .required(),
+  });
 }
 module.exports = new Validation();
