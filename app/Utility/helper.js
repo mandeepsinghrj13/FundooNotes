@@ -14,12 +14,12 @@ class Helper {
     });
   };
 
-  jwtTokenGenerate = (data) => {
+  jwtTokenGenerate = (data, sec) => {
     const dataForToken = {
       email: data.email,
       id: data.id,
     };
-    return jwt.sign(dataForToken, process.env.SECRET_KEY, { expiresIn: "24H" });
+    return jwt.sign(dataForToken, sec, { expiresIn: "60m" });
   };
 
   /**
@@ -35,6 +35,36 @@ class Helper {
       // console.log("head: " + header);
       const token = myArr[1];
       const decode = jwt.verify(token, process.env.SECRET_KEY);
+      if (decode) {
+        // console.log(
+        //   "token decode email and" + decode.email + " id " + decode.id
+        // );
+        logger.info("token verified");
+        req.userData = decode;
+        next();
+      } else {
+        logger.info("token verify error");
+      }
+    } catch (error) {
+      res.status(401).send({
+        error: "Your token has expiered",
+      });
+    }
+  };
+
+  /**
+   * verifyTokenforreset
+   * @param {*} req
+   * @param {*} res
+   * @param {*} next
+   */
+  verifyTokenforreset = (req, res, next) => {
+    try {
+      const header = req.headers.authorization;
+      const myArr = header.split(" ");
+      // console.log("head: " + header);
+      const token = myArr[1];
+      const decode = jwt.verify(token, process.env.SECRET_KEY_FOR_RESET);
       if (decode) {
         // console.log(
         //   "token decode email and" + decode.email + " id " + decode.id

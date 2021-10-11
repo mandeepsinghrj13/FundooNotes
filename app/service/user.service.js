@@ -28,7 +28,7 @@ class UserService {
         // compare both password
         const result = bcrypt.compareSync(user.Password, data.Password);
         if (result) {
-          const token = helper.jwtTokenGenerate(data);
+          const token = helper.jwtTokenGenerate(data, process.env.SECRET_KEY);
           logger.info("Valid Password And Generate Jwt Token");
           return callback(null, token);
         } else {

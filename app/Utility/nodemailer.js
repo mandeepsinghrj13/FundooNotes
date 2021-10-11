@@ -12,7 +12,7 @@ exports.sendEmail = (data) => {
     },
   });
   logger.info("Jwt Token Generate");
-  const token = auth.jwtTokenGenerate(data);
+  const token = auth.jwtTokenGenerate(data, process.env.SECRET_KEY_FOR_RESET);
 
   /**
    * show in email
