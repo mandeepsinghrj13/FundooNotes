@@ -17,4 +17,6 @@ module.exports = (app) => {
   );
   // Post createnotes
   app.post("/createnotes", helper.verifyToken, noteController.createNote);
+  // get all notes
+  app.get("/getnotes", helper.verifyToken, noteController.getNote);
 };

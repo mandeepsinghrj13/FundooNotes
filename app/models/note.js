@@ -39,5 +39,20 @@ class Model {
       }
     });
   };
+  /**
+   * getNote
+   * @param {*} id
+   * @param {*} callback
+   */
+
+  getNote = (id, callback) => {
+    Note.find({ userId: id.id })
+      .then((data) => {
+        callback(null, data);
+      })
+      .catch((err) => {
+        callback(err, null);
+      });
+  };
 }
 module.exports = new Model();

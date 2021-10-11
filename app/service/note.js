@@ -16,5 +16,20 @@ class Service {
       }
     });
   };
+  /**
+   * getNote
+   * @param {*} id
+   * @param {*} callback
+   */
+
+  getNote = (id, callback) => {
+    noteModel.getNote(id, (err, data) => {
+      if (err) {
+        return callback(err, null);
+      } else {
+        return callback(null, data);
+      }
+    });
+  };
 }
 module.exports = new Service();
