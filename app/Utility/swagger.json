@@ -208,6 +208,40 @@
                 }
             }
         }
+    },
+    "/getnotes": {
+        "get": {
+            "tags": [
+                "Get Notes"
+            ],
+            "description": "Get all notes",
+            "parameters": [
+                {
+                    "in": "header",
+                    "name": "Authorization",
+                    "description": "Token for vaidation",
+                    "schema": {
+                        "type": "string"
+                        
+                    }
+                }
+            ],
+            "produces": [
+                "application/json"
+            ],
+            
+            "responses": {
+                "201": {
+                    "description": "Get All Notes successfully"
+                },
+                "401": {
+                    "description": "Your token has expiered Or Enter Valid Token"
+                },
+                "500": {
+                    "description": "Internal server error"
+                }
+            }
+        }
     }
 },
     "definitions": {
