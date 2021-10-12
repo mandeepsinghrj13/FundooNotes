@@ -46,5 +46,18 @@ class Service {
   //       }
   //     });
   //   };
+
+  /**
+   * getNoteById
+   * @param {*} id
+   * @param {*} callback
+   */
+
+  getNoteById = (id, resolve, reject) => {
+    noteModel
+      .getNoteById(id)
+      .then((data) => resolve(data))
+      .catch(() => reject());
+  };
 }
 module.exports = new Service();

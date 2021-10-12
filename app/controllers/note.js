@@ -104,5 +104,38 @@ class Note {
       });
     }
   };
+
+  /**
+   * getnotebyid
+   * @param {*} req
+   * @param {*} res
+   * @returns
+   */
+  getNoteById = (req, res) => {
+    try {
+      const id = {
+        userId: req.userData.id,
+        noteId: req.params.id,
+      };
+      noteService.getNoteById(id, resolve, reject);
+      function resolve(data) {
+        logger.info("Note Found Successfully");
+        return res.send({
+          success: true,
+          message: "Note Found Successfully",
+          data: data,
+        });
+      }
+      function reject() {
+        return res.send();
+      }
+    } catch {
+      logger.error("Internal server error");
+      return res.status(500).json({
+        message: "Internal server error",
+        success: false,
+      });
+    }
+  };
 }
 module.exports = new Note();

@@ -53,15 +53,28 @@ class Model {
   //       }
   //     });
   //   };
-
   /**
    * getNote
    * @param {*} id
+   * @returns
    */
 
   getNote = (id) => {
     return new Promise((resolve, reject) => {
       Note.find({ userId: id.id })
+        .then((data) => resolve(data))
+        .catch(() => reject());
+    });
+  };
+  /**
+   * getNoteById
+   * @param {*} id
+   * @returns
+   */
+
+  getNoteById = (id) => {
+    return new Promise((resolve, reject) => {
+      Note.find({ _id: id.noteId, userId: id.userId })
         .then((data) => resolve(data))
         .catch(() => reject());
     });

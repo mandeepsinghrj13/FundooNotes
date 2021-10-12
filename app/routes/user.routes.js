@@ -19,4 +19,6 @@ module.exports = (app) => {
   app.post("/createnotes", helper.verifyToken, noteController.createNote);
   // get all notes
   app.get("/getnotes", helper.verifyToken, noteController.getNote);
+  // get note by id
+  app.get("/getnote/:id", helper.verifyToken, noteController.getNoteById);
 };
