@@ -161,6 +161,53 @@
                 }
             }
         }
+    },
+    "/createnotes": {
+        "post": {
+            "tags": [
+                "Create Notes"
+            ],
+            "description": "Creating a note",
+            "parameters": [
+                {
+                    "in": "header",
+                    "name": "Authorization",
+                    "description": "Token for vaidation",
+                    "schema": {
+                        "type": "string"
+                       
+                    }
+                },
+                {
+                    "name": "create note",
+                    "in": "body",
+                    "description": "Note body",
+                    "schema": {
+                        "$ref": "#/definitions/notes"
+                    }
+                }
+            ],
+            "produces": [
+                "application/json"
+            ],
+            "schema": {
+                "$ref": "#/definitions/notes"
+            },
+            "responses": {
+                "201": {
+                    "description": "Successfully create note"
+                },
+                "400": {
+                    "description": "fail create note"
+                },
+                "401": {
+                    "description": "Your token has expiered"
+                },
+                "500": {
+                    "description": "Internal server error"
+                }
+            }
+        }
     }
 },
     "definitions": {
@@ -209,6 +256,21 @@
             },
             "example": {
                 "Password": "Password@1234"
+            }
+        },
+        "notes": {
+            "type": "object",
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                }
+            },
+            "example": {
+                "title": " title",
+                "description": "description"
             }
         }
     }
