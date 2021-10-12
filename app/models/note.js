@@ -1,4 +1,5 @@
-const logger = require("../Utility/logger");
+/* eslint-disable prefer-promise-reject-errors */
+// const logger = require("../Utility/logger");
 const mongoose = require("mongoose");
 const noteSchema = mongoose.Schema(
   {
@@ -22,37 +23,48 @@ class Model {
   /**
    * createNote
    * @param {*} info
-   * @param {*} callback
+   * @returns
    */
-  createNote = (info, callback) => {
-    const note = new Note({
-      userId: info.userId,
-      title: info.title,
-      description: info.description,
-    });
-    note.save((error, data) => {
-      if (error) {
-        logger.error(error);
-        return callback(error, null);
-      } else {
-        return callback(null, data);
-      }
+  createNote = (info) => {
+    return new Promise((resolve, reject) => {
+      const note = new Note({
+        userId: info.userId,
+        title: info.title,
+        description: info.description,
+      });
+      note
+        .save()
+        .then((data) => resolve(data))
+        .catch(() => reject());
     });
   };
+  //   createNote = (info, callback) => {
+  //     const note = new Note({
+  //       userId: info.userId,
+  //       title: info.title,
+  //       description: info.description,
+  //     });
+  //     note.save((error, data) => {
+  //       if (error) {
+  //         logger.error(error);
+  //         return callback(error, null);
+  //       } else {
+  //         return callback(null, data);
+  //       }
+  //     });
+  //   };
+
   /**
    * getNote
    * @param {*} id
-   * @param {*} callback
    */
 
-  getNote = (id, callback) => {
-    Note.find({ userId: id.id })
-      .then((data) => {
-        callback(null, data);
-      })
-      .catch((err) => {
-        callback(err, null);
-      });
+  getNote = (id) => {
+    return new Promise((resolve, reject) => {
+      Note.find({ userId: id.id })
+        .then((data) => resolve(data))
+        .catch(() => reject());
+    });
   };
 }
 module.exports = new Model();
