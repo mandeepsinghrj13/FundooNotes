@@ -176,5 +176,30 @@ class Note {
       });
     }
   };
+
+  deleteNoteById = async (req, res) => {
+    try {
+      const id = { userId: req.userData.id, noteId: req.params.id };
+      const data = await noteService.deleteNoteById(id);
+      if (data.message) {
+        return res.status(404).json({
+          message: "Note not found",
+          success: false,
+        });
+      }
+      logger.info("Note Delete succesfully");
+      return res.status(200).json({
+        success: true,
+        message: "Note Delete succesfully",
+        data: data,
+      });
+    } catch (err) {
+      return res.status(500).json({
+        success: false,
+        message: "Note not updated",
+        data: err,
+      });
+    }
+  };
 }
 module.exports = new Note();

@@ -72,5 +72,13 @@ class Service {
       .then((data) => resolve(data))
       .catch(() => reject());
   };
+
+  deleteNoteById = async (id) => {
+    try {
+      return await noteModel.deleteNoteById(id);
+    } catch (err) {
+      return err;
+    }
+  };
 }
 module.exports = new Service();

@@ -96,5 +96,13 @@ class Model {
         .catch(() => reject());
     });
   };
+
+  deleteNoteById = async (id) => {
+    try {
+      return await Note.findOneAndDelete({ _id: id.noteId, userId: id.userId });
+    } catch (err) {
+      return err;
+    }
+  };
 }
 module.exports = new Model();
