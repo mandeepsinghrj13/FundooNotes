@@ -79,5 +79,22 @@ class Model {
         .catch(() => reject());
     });
   };
+
+  /**
+   * updateNoteById
+   * @param {*} updatedNote
+   * @returns
+   */
+  updateNoteById = (updatedNote) => {
+    return new Promise((resolve, reject) => {
+      Note.findByIdAndUpdate(
+        updatedNote.id,
+        { title: updatedNote.title, description: updatedNote.description },
+        { new: true }
+      )
+        .then((data) => resolve(data))
+        .catch(() => reject());
+    });
+  };
 }
 module.exports = new Model();

@@ -59,5 +59,18 @@ class Service {
       .then((data) => resolve(data))
       .catch(() => reject());
   };
+
+  /**
+   * updateNoteById
+   * @param {*} updateNote
+   * @param {*} resolve
+   * @param {*} reject
+   */
+  updateNoteById = (updateNote, resolve, reject) => {
+    noteModel
+      .updateNoteById(updateNote)
+      .then((data) => resolve(data))
+      .catch(() => reject());
+  };
 }
 module.exports = new Service();

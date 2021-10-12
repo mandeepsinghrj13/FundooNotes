@@ -137,5 +137,44 @@ class Note {
       });
     }
   };
+
+  /**
+   * updateNoteById
+   * @param {*} req
+   * @param {*} res
+   * @returns
+   */
+  updateNoteById = (req, res) => {
+    try {
+      const updateNote = {
+        id: req.params.id,
+        userId: req.userData.id,
+        title: req.body.title,
+        description: req.body.description,
+      };
+      noteService.updateNoteById(updateNote, resolve, reject);
+      function resolve(data) {
+        logger.info("Note Updated Successfully");
+        return res.status(201).send({
+          message: "Note Updated Successfully",
+          success: true,
+          data: data,
+        });
+      }
+      function reject() {
+        logger.error("Note Not Updated or NoteId Is Not Match");
+        return res.status(400).json({
+          message: "Note Not Updated or NoteId Is Not Match",
+          success: false,
+        });
+      }
+    } catch {
+      logger.error("Internal Server Error");
+      return res.status(500).json({
+        message: "Internal server error",
+        success: false,
+      });
+    }
+  };
 }
 module.exports = new Note();

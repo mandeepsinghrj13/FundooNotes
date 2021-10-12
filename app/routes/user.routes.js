@@ -10,15 +10,12 @@ module.exports = (app) => {
   // Post forgetpassword
   app.post("/forgetPassword", controller.forgetPassword);
   // Post resetpassword
-  app.post(
-    "/resetpassword",
-    helper.verifyTokenforreset,
-    controller.resetPassword
-  );
+  app.post("/resetpassword", helper.verifyTokenforreset, controller.resetPassword);
   // Post createnotes
   app.post("/createnotes", helper.verifyToken, noteController.createNote);
   // get all notes
   app.get("/getnotes", helper.verifyToken, noteController.getNote);
   // get note by id
   app.get("/getnote/:id", helper.verifyToken, noteController.getNoteById);
+  app.put("/updatenotes/:id", helper.verifyToken, noteController.updateNoteById);
 };
