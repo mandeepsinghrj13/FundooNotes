@@ -282,6 +282,54 @@
                 }
             }
         }
+    },
+    "/updatenotes/{id}": {
+        "put": {
+            "tags": [
+                "Update Note By Id"
+            ],
+            "description": "put note by ID",
+            "parameters": [
+                {
+                    "in": "header",
+                    "name": "Authorization",
+                    "description": "Token for vaidation",
+                    "schema": {
+                        "type": "string"
+                    }
+                },
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description": "Id of note you want to update",
+                    "schema": {
+                        "type": "string"
+                    }
+                },
+                {
+                    "name": "update note",
+                    "in": "body",
+                    "description": "Note body",
+                    "schema": {
+                        "$ref": "#/definitions/notes"
+                    }
+                }
+            ],
+            "produces": [
+                "application/json"
+            ],
+            "responses": {
+                "201": {
+                    "description": "Note Updated Successfully"
+                },
+                "401": {
+                    "description": "Your token has expiered Or Enter Valid Token"
+                },
+                "500": {
+                    "description": "Internal server error"
+                }
+            }
+        }
     }
 },
     "definitions": {
