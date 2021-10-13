@@ -1,6 +1,6 @@
 const labelService = require("../service/labelservice.js");
 const logger = require("../Utility/logger");
-// const validation = require("../Utility/validation.js");
+const validation = require("../Utility/validation.js");
 class Labels {
   /**
    * createLabel
@@ -14,7 +14,17 @@ class Labels {
         labelName: req.body.labelName,
         userId: req.userData.id,
       };
+      // check validation user body
+      const validationCreateLabel = validation.createLabel.validate(label);
 
+      if (validationCreateLabel.error) {
+        logger.error("Wrong Input Validations");
+        return res.status(400).send({
+          success: false,
+          message: "Wrong Input Validations",
+          data: validationCreateLabel,
+        });
+      }
       labelService.createLabel(label, resolve, reject);
       function resolve(data) {
         logger.info("Label Created Successfully");
