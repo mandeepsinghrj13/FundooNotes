@@ -1,0 +1,35 @@
+/* eslint-disable prefer-promise-reject-errors */
+const mongoose = require("mongoose");
+const labelSchema = mongoose.Schema(
+  {
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    labelName: {
+      type: String,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
+
+const Label = mongoose.model("Label", labelSchema);
+class LabelModel {
+  /**
+   * createLabel
+   * @param {*} info
+   * @returns
+   */
+  createLabel = (info) => {
+    return new Promise((resolve, reject) => {
+      const label = new Label({
+        userId: info.userId,
+        labelName: info.labelName,
+      });
+      label
+        .save()
+        .then((data) => resolve(data))
+        .catch(() => reject());
+    });
+  };
+}
+module.exports = new LabelModel();
