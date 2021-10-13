@@ -212,7 +212,7 @@
     "/getnotes": {
         "get": {
             "tags": [
-                "Get Notes"
+                "Get All Notes"
             ],
             "description": "Get all notes",
             "parameters": [
@@ -233,6 +233,46 @@
             "responses": {
                 "201": {
                     "description": "Get All Notes successfully"
+                },
+                "401": {
+                    "description": "Your token has expiered Or Enter Valid Token"
+                },
+                "500": {
+                    "description": "Internal server error"
+                }
+            }
+        }
+    },
+    "/getnote/{id}": {
+        "get": {
+            "tags": [
+                "Get Note By Id"
+            ],
+            "description": "Get note by ID",
+            "parameters": [
+                {
+                    "in": "header",
+                    "name": "Authorization",
+                    "description": "Token for vaidation",
+                    "schema": {
+                        "type": "string"
+                    }
+                },
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description": "Id of note you want to update",
+                    "schema": {
+                        "type": "string"
+                    }
+                }
+            ],
+            "produces": [
+                "application/json"
+            ],
+            "responses": {
+                "200": {
+                    "description": "Note Found Successfully"
                 },
                 "401": {
                     "description": "Your token has expiered Or Enter Valid Token"
@@ -270,6 +310,10 @@
                 "Password": {
                     "type": "string"
                 }
+            },
+            "example": {
+                "email":"mandeep.test1996@gmail.com",
+                "Password": "Password@1234"
             }
         },
         "forgetPasswordUser": {

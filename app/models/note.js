@@ -38,21 +38,7 @@ class Model {
         .catch(() => reject());
     });
   };
-  //   createNote = (info, callback) => {
-  //     const note = new Note({
-  //       userId: info.userId,
-  //       title: info.title,
-  //       description: info.description,
-  //     });
-  //     note.save((error, data) => {
-  //       if (error) {
-  //         logger.error(error);
-  //         return callback(error, null);
-  //       } else {
-  //         return callback(null, data);
-  //       }
-  //     });
-  //   };
+
   /**
    * getNote
    * @param {*} id
