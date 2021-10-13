@@ -57,5 +57,18 @@ class LabelModel {
         .catch(() => reject());
     });
   };
+
+  /**
+   * updateLabelById
+   * @param {*} updatedNote
+   * @returns
+   */
+  updateLabelById = (updatedNote) => {
+    return new Promise((resolve, reject) => {
+      Label.findByIdAndUpdate(updatedNote.id, { labelName: updatedNote.labelName }, { new: true })
+        .then((data) => resolve(data))
+        .catch(() => reject());
+    });
+  };
 }
 module.exports = new LabelModel();

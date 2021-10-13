@@ -38,5 +38,18 @@ class LabelService {
       .then((data) => resolve(data))
       .catch(() => reject());
   };
+
+  /**
+   * updateLabelById
+   * @param {*} updateLabel
+   * @param {*} resolve
+   * @param {*} reject
+   */
+  updateLabelById = (updateLabel, resolve, reject) => {
+    labelModel
+      .updateLabelById(updateLabel)
+      .then((data) => resolve(data))
+      .catch(() => reject());
+  };
 }
 module.exports = new LabelService();

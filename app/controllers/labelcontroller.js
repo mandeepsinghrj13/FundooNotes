@@ -137,5 +137,54 @@ class Labels {
       });
     }
   };
+
+  /**
+   * updateLabelById
+   * @param {*} req
+   * @param {*} res
+   * @returns
+   */
+  updateLabelById = (req, res) => {
+    try {
+      const updateLabel = {
+        id: req.params.id,
+        userId: req.userData.id,
+        labelName: req.body.labelName,
+      };
+      // check validation user body
+      const validationUpdateLabel = validation.UpdateLabel.validate(updateLabel);
+
+      if (validationUpdateLabel.error) {
+        logger.error("Wrong Input Validations");
+        return res.status(400).send({
+          success: false,
+          message: "Wrong Input Validations",
+          data: validationUpdateLabel,
+        });
+      }
+      labelService.updateLabelById(updateLabel, resolve, reject);
+      function resolve(data) {
+        logger.info("Label Updated Successfully");
+        return res.status(201).send({
+          message: "Label Updated Successfully",
+          success: true,
+          data: data,
+        });
+      }
+      function reject() {
+        logger.error("Label Not Updated or LabelId Is Not Match");
+        return res.status(400).json({
+          message: "Label Not Updated or LabelId Is Not Match",
+          success: false,
+        });
+      }
+    } catch {
+      logger.error("Internal Server Error");
+      return res.status(500).json({
+        message: "Internal server error",
+        success: false,
+      });
+    }
+  };
 }
 module.exports = new Labels();

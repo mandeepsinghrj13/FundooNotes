@@ -27,4 +27,6 @@ module.exports = (app) => {
   app.get("/getlabels", helper.verifyToken, labelController.getLabel);
   // get Get label by id
   app.get("/getlabel/:id", helper.verifyToken, labelController.getLabelById);
+  // put update label by id
+  app.put("/updatelabel/:id", helper.verifyToken, labelController.updateLabelById);
 };
