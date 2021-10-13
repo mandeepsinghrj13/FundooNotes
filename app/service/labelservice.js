@@ -12,5 +12,18 @@ class LabelService {
       .then((data) => resolve(data))
       .catch(() => reject());
   };
+
+  /**
+   * getLabel
+   * @param {*} id
+   * @param {*} resolve
+   * @param {*} reject
+   */
+  getLabel = (id, resolve, reject) => {
+    labelModel
+      .getLabel(id)
+      .then((data) => resolve(data))
+      .catch(() => reject());
+  };
 }
 module.exports = new LabelService();

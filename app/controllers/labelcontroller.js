@@ -49,5 +49,39 @@ class Labels {
       });
     }
   };
+
+  /**
+   * getLabel
+   * @param {*} req
+   * @param {*} res
+   * @returns
+   */
+  getLabel = (req, res) => {
+    try {
+      const id = { id: req.userData.id };
+
+      labelService.getLabel(id, resolve, reject);
+      function resolve(data) {
+        logger.info("Get All Label successfully");
+        return res.status(201).json({
+          message: "Get All Label successfully",
+          success: true,
+          data: data,
+        });
+      }
+      function reject() {
+        logger.error("Failed to get all Label");
+        return res.status(400).json({
+          message: "failed to get all Label",
+          success: false,
+        });
+      }
+    } catch {
+      logger.error("Internal Error");
+      return res.status(500).json({
+        message: "Internal Error",
+      });
+    }
+  };
 }
 module.exports = new Labels();
