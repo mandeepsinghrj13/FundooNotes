@@ -330,6 +330,46 @@
                 }
             }
         }
+    },
+    "/deletenote/{id}": {
+        "delete": {
+            "tags": [
+                "Delete Note By Id"
+            ],
+            "description": "delete note by ID",
+            "parameters": [
+                {
+                    "in": "header",
+                    "name": "Authorization",
+                    "description": "Token for vaidation",
+                    "schema": {
+                        "type": "string"
+                    }
+                },
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description": "Id of note you want to update",
+                    "schema": {
+                        "type": "string"
+                    }
+                }
+            ],
+            "produces": [
+                "application/json"
+            ],
+            "responses": {
+                "200": {
+                    "description": "Note Delete succesfully"
+                },
+                "401": {
+                    "description": "Your token has expiered Or Enter Valid Token"
+                },
+                "500": {
+                    "description": "Internal server error"
+                }
+            }
+        }
     }
 },
     "definitions": {
