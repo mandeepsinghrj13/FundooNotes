@@ -59,7 +59,17 @@ class Labels {
   getLabel = (req, res) => {
     try {
       const id = { id: req.userData.id };
+      //   // check validation user body
+      const validationGetLabel = validation.getLabels.validate(id);
 
+      if (validationGetLabel.error) {
+        logger.error("Wrong Input Validations");
+        return res.status(400).send({
+          success: false,
+          message: "Wrong Input Validations",
+          data: validationGetLabel,
+        });
+      }
       labelService.getLabel(id, resolve, reject);
       function resolve(data) {
         logger.info("Get All Label successfully");

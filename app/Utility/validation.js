@@ -71,5 +71,9 @@ class Validation {
     userId: Joi.string().required(),
     labelName: Joi.string().required(),
   });
+
+  getLabels = Joi.object({
+    id: Joi.string().required(),
+  });
 }
 module.exports = new Validation();
