@@ -58,7 +58,7 @@
             "Password": "MANDEEPSINGH12$"
         },
         "login": {
-            "email": "singh.mr.1996@gmail.com",
+            "email": "mandeep.test1996@gmail.com",
             "Password": "Password@1234"
         },
         "loginWrongPassword": {
@@ -115,10 +115,10 @@
     },
     "reset":{
         "resetPassword":{
-            "Password": "Password@1234567890"
+            "Password": "Password@1234"
         },
         "tokenOne":
-            "B eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hbmRlZXAudGVzdDE5OTZAZ21haWwuY29tIiwiaWQiOiI2MTYyODBmZTcwNDFhNTFjMzMxMDI0ODIiLCJpYXQiOjE2MzM4ODIyODIsImV4cCI6MTYzMzk2ODY4Mn0.3J8-XoQt-GDLLp0w0jML2YweCbDELQ4g_SOo8tsd25o",
+            "B eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hbmRlZXAudGVzdDE5OTZAZ21haWwuY29tIiwiaWQiOiI2MTYyODBmZTcwNDFhNTFjMzMxMDI0ODIiLCJpYXQiOjE2MzQxMjQ5NTAsImV4cCI6MTYzNDEyODU1MH0.BPz-Epa_qhLpf4alG6nJo0JaOHacLU4q2jpuvii_Mdk",
         "tokenTwoInvaild": "B yJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hbmRlZXAudGVzdDE5OTZAZ21haWwuY29tIiwiaWQiOiI2MTYyODBmZTcwNDFhNTFjMzMxMDI0ODIiLCJpYXQiOjE2MzM4NjY2MjgsImV4cCI6MTYzMzg3MzgyOH0.h1Z6aGUpjImdPcoQBK_--MAIl5NMCUmu_14lmXxY6to",
         "tokenInvaild": "BeyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hbmRlZXAudGVzdDE5OTZAZ21haWwuY29tIiwiaWQiOiI2MTYyODBmZTcwNDFhNTFjMzMxMDI0ODIiLCJpYXQiOjE2MzM4NjY2MjgsImV4cCI6MTYzMzg3MzgyOH0.h1Z6aGUpjImdPcoQBK_--MAIl5NMCUmu_14lmXxY6to"
 

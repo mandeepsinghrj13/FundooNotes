@@ -35,9 +35,7 @@ describe("registration for positive and negative ", () => {
         }
         res.should.have.status(201);
         res.body.should.have.property("success").eql(true);
-        res.body.should.have
-          .property("message")
-          .eql("User Data Inserted successfully");
+        res.body.should.have.property("message").eql("User Data Inserted successfully");
         done();
       });
   });
@@ -117,8 +115,7 @@ describe("registration for positive and negative ", () => {
    * it function for registration when user not writen Firstname atlist twoLetter.
    * */
   it("GivenRegistrationDetails_When_FirstnameatlisttwoLetter", (done) => {
-    const registrationDetails =
-      userInputs.user.registrationfirstnameatlisttwoLetter;
+    const registrationDetails = userInputs.user.registrationfirstnameatlisttwoLetter;
     chai
       .request(server)
       .post("/register")
@@ -137,8 +134,7 @@ describe("registration for positive and negative ", () => {
    * it function for registration when user not writen Firstname SecondLetterShouldLower.
    * */
   it("GivenRegistrationDetails_When_FirstnameSecondLetterShouldLower", (done) => {
-    const registrationDetails =
-      userInputs.user.RegistrationFirstnameSecondLetterShouldLower;
+    const registrationDetails = userInputs.user.RegistrationFirstnameSecondLetterShouldLower;
     chai
       .request(server)
       .post("/register")
@@ -157,8 +153,7 @@ describe("registration for positive and negative ", () => {
    * it function for registration when user not writen Email DotCom ShouldLowerLatter.
    * */
   it("GivenRegistrationDetails_When_EmailDotComShouldLowerLatter", (done) => {
-    const registrationDetails =
-      userInputs.user.RegistrationEmailComShouldLowerLatter;
+    const registrationDetails = userInputs.user.RegistrationEmailComShouldLowerLatter;
     chai
       .request(server)
       .post("/register")
@@ -177,8 +172,7 @@ describe("registration for positive and negative ", () => {
    * it function for registration when user not writen Email StartWith TwoLetter.
    * */
   it("GivenRegistrationDetails_When_EmailStartWithTwoLetter", (done) => {
-    const registrationDetails =
-      userInputs.user.RegistrationEmailStartWithTwoLetter;
+    const registrationDetails = userInputs.user.RegistrationEmailStartWithTwoLetter;
     chai
       .request(server)
       .post("/register")
@@ -197,8 +191,7 @@ describe("registration for positive and negative ", () => {
    * it function for registration when user not writen Password Atlist OneUpperLetter.
    * */
   it("GivenRegistrationDetails_When_PasswordAtlistOneUpperLetter", (done) => {
-    const registrationDetails =
-      userInputs.user.RegistrationPasswordAtlistOneUpperLetter;
+    const registrationDetails = userInputs.user.RegistrationPasswordAtlistOneUpperLetter;
     chai
       .request(server)
       .post("/register")
@@ -217,8 +210,7 @@ describe("registration for positive and negative ", () => {
    * it function for registration when user not writen Password Atlist OneLowerLetter.
    * */
   it("GivenRegistrationDetails_When_PasswordAtlistOneLowerLetter", (done) => {
-    const registrationDetails =
-      userInputs.user.RegistrationPasswordAtlistOneLowerLetter;
+    const registrationDetails = userInputs.user.RegistrationPasswordAtlistOneLowerLetter;
     chai
       .request(server)
       .post("/register")
@@ -373,8 +365,7 @@ describe("login for positive and negative ", () => {
    * it function for login when user Login Password Atlist One SpecialCharacters.
    * */
   it("GivenLoginDetails_When_LoginPasswordAtlistOneSpecialCharacters", (done) => {
-    const loginDetails =
-      userInputs.user.LoginPasswordAtlistOneSpecialCharacters;
+    const loginDetails = userInputs.user.LoginPasswordAtlistOneSpecialCharacters;
     chai
       .request(server)
       .post("/login")
@@ -433,7 +424,7 @@ describe("forgetpassword for positive and negative ", () => {
   /**
    * it function for forgetpassword when email was proper with regex validation .
    */
-  it.skip("GivenForgetPasswordDetails_WhenProper_UserEmail_Successfully", (done) => {
+  it("GivenForgetPasswordDetails_WhenProper_UserEmail_Successfully", (done) => {
     const forgetPasswordDetails = userInputs.forgetpassworduser.ProperEmail;
     chai
       .request(server)
@@ -469,8 +460,7 @@ describe("forgetpassword for positive and negative ", () => {
    * it function for forgetpassword when email was not proper without @ regex validation .
    */
   it("GivenForgetPasswordDetails_WhenNotProper_UserEmail_ItShould_Have__@__", (done) => {
-    const forgetPasswordDetails =
-      userInputs.forgetpassworduser.NotProperEmailJoiValidation;
+    const forgetPasswordDetails = userInputs.forgetpassworduser.NotProperEmailJoiValidation;
     chai
       .request(server)
       .post("/forgetPassword")
@@ -539,9 +529,7 @@ describe("resetpassword for positive and negative ", () => {
         }
         res.should.have.status(200);
         res.body.should.have.property("success").eql(true);
-        res.body.should.have
-          .property("message")
-          .eql("Password reset succesfully");
+        res.body.should.have.property("message").eql("Password reset succesfully");
         done();
       });
   });

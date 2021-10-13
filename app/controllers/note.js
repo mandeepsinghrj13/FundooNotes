@@ -150,7 +150,7 @@ class Note {
     try {
       const id = { userId: req.userData.id, noteId: req.params.id };
       const data = await noteService.deleteNoteById(id);
-      if (data.message) {
+      if (data) {
         return res.status(404).json({
           message: "Note not found",
           success: false,
@@ -165,7 +165,7 @@ class Note {
     } catch (err) {
       return res.status(500).json({
         success: false,
-        message: "Note not updated",
+        message: "Internal server error",
         data: err,
       });
     }
