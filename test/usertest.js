@@ -515,7 +515,7 @@ describe("resetpassword for positive and negative ", () => {
   /**
    * it function for resetpassword when proper password successfully reset .
    */
-  it("GivenResetPasswordDetails_WhenProper_Password_Successfully_Reset", (done) => {
+  it.skip("GivenResetPasswordDetails_WhenProper_Password_Successfully_Reset", (done) => {
     const resetPasswordDetails = userInputs.reset.resetPassword;
     const token = userInputs.reset.tokenOne;
     chai

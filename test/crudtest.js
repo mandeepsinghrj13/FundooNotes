@@ -307,7 +307,7 @@ describe("update note by id api for positive and negative test case", () => {
         if (err) {
           return done(err);
         }
-        res.should.have.status(201);
+        res.should.have.status(400);
         done();
       });
   });
@@ -332,8 +332,6 @@ describe("update note by id api for positive and negative test case", () => {
       });
   });
 });
-// fgfdgdfgfdgfdg
-// gfdkjhgdjksgfhdjgf
 describe("delete note by id api for positive and negative test case", () => {
   it("GivenDeleteNoteByIdDetails_When_Note_Deleted_Successfully", (done) => {
     const token = noteInputs.notes.loginValidToken;
@@ -346,7 +344,7 @@ describe("delete note by id api for positive and negative test case", () => {
         if (err) {
           return done(err);
         }
-        res.should.have.status(500);
+        res.should.have.status(400);
         done();
       });
   });
@@ -394,7 +392,7 @@ describe("delete note by id api for positive and negative test case", () => {
         if (err) {
           return done(err);
         }
-        res.should.have.status(500);
+        res.should.have.status(400);
         done();
       });
   });
@@ -410,7 +408,7 @@ describe("delete note by id api for positive and negative test case", () => {
         if (err) {
           return done(err);
         }
-        res.should.have.status(500);
+        res.should.have.status(400);
         done();
       });
   });

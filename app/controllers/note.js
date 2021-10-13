@@ -1,5 +1,6 @@
 const noteService = require("../service/note");
 const logger = require("../Utility/logger");
+const validation = require("../Utility/validation.js");
 
 class Note {
   /**
@@ -16,6 +17,17 @@ class Note {
         title: req.body.title,
         description: req.body.description,
       };
+      // check validation user body
+      const validationCreateNote = validation.createNotes.validate(note);
+
+      if (validationCreateNote.error) {
+        logger.error("Wrong Input Validations");
+        return res.status(400).send({
+          success: false,
+          message: "Wrong Input Validations",
+          data: validationCreateNote,
+        });
+      }
       noteService.createNote(note, resolve, reject);
       function resolve(data) {
         logger.info("Successfully create note");
@@ -50,6 +62,17 @@ class Note {
   getNote = (req, res) => {
     try {
       const id = { id: req.userData.id };
+      // check validation user body
+      const validationGetNote = validation.getNotes.validate(id);
+
+      if (validationGetNote.error) {
+        logger.error("Wrong Input Validations");
+        return res.status(400).send({
+          success: false,
+          message: "Wrong Input Validations",
+          data: validationGetNote,
+        });
+      }
       noteService.getNote(id, resolve, reject);
       function resolve(data) {
         logger.info("Get All Notes successfully");
@@ -86,6 +109,17 @@ class Note {
         userId: req.userData.id,
         noteId: req.params.id,
       };
+      // check validation user body
+      const validationGetNoteById = validation.GetNoteById.validate(id);
+
+      if (validationGetNoteById.error) {
+        logger.error("Wrong Input Validations");
+        return res.status(400).send({
+          success: false,
+          message: "Wrong Input Validations",
+          data: validationGetNoteById,
+        });
+      }
       noteService.getNoteById(id, resolve, reject);
       function resolve(data) {
         logger.info("Note Found Successfully");
@@ -121,6 +155,17 @@ class Note {
         title: req.body.title,
         description: req.body.description,
       };
+      // check validation user body
+      const validationUpdateNote = validation.UpdateNote.validate(updateNote);
+
+      if (validationUpdateNote.error) {
+        logger.error("Wrong Input Validations");
+        return res.status(400).send({
+          success: false,
+          message: "Wrong Input Validations",
+          data: validationUpdateNote,
+        });
+      }
       noteService.updateNoteById(updateNote, resolve, reject);
       function resolve(data) {
         logger.info("Note Updated Successfully");
@@ -149,6 +194,17 @@ class Note {
   deleteNoteById = async (req, res) => {
     try {
       const id = { userId: req.userData.id, noteId: req.params.id };
+      // check validation user body
+      const validationDeleteNoteById = validation.DeleteNoteById.validate(id);
+
+      if (validationDeleteNoteById.error) {
+        logger.error("Wrong Input Validations");
+        return res.status(400).send({
+          success: false,
+          message: "Wrong Input Validations",
+          data: validationDeleteNoteById,
+        });
+      }
       const data = await noteService.deleteNoteById(id);
       if (data) {
         return res.status(404).json({
