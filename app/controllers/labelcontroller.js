@@ -93,5 +93,49 @@ class Labels {
       });
     }
   };
+
+  /**
+   * getLabelById
+   * @param {*} req
+   * @param {*} res
+   * @returns
+   */
+  getLabelById = (req, res) => {
+    try {
+      const id = {
+        userId: req.userData.id,
+        noteId: req.params.id,
+      };
+      // check validation user body
+      const validationGetLabelById = validation.GetLabelById.validate(id);
+
+      if (validationGetLabelById.error) {
+        logger.error("Wrong Input Validations");
+        return res.status(400).send({
+          success: false,
+          message: "Wrong Input Validations",
+          data: validationGetLabelById,
+        });
+      }
+      labelService.getLabelById(id, resolve, reject);
+      function resolve(data) {
+        logger.info("Label Found Successfully");
+        return res.send({
+          success: true,
+          message: "Label Found Successfully",
+          data: data,
+        });
+      }
+      function reject() {
+        return res.send();
+      }
+    } catch {
+      logger.error("Internal server error");
+      return res.status(500).json({
+        message: "Internal server error",
+        success: false,
+      });
+    }
+  };
 }
 module.exports = new Labels();

@@ -23,6 +23,8 @@ module.exports = (app) => {
   app.delete("/deletenote/:id", helper.verifyToken, noteController.deleteNoteById);
   // post create label
   app.post("/createlabel", helper.verifyToken, labelController.createLabel);
-  // get Get label
+  // get Get All label
   app.get("/getlabels", helper.verifyToken, labelController.getLabel);
+  // get Get label by id
+  app.get("/getlabel/:id", helper.verifyToken, labelController.getLabelById);
 };
