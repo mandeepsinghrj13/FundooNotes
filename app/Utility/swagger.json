@@ -370,6 +370,50 @@
                 }
             }
         }
+    },
+    "/createlabel": {
+        "post": {
+            "tags": [
+                "Create Label"
+            ],
+            "description": "Creating a Label",
+            "parameters": [
+                {
+                    "in": "header",
+                    "name": "Authorization",
+                    "description": "Token for vaidation",
+                    "schema": {
+                        "type": "string"
+                       
+                    }
+                },
+                {
+                    "name": "create label",
+                    "in": "body",
+                    "description": "Label body",
+                    "schema": {
+                        "$ref": "#/definitions/labes"
+                    }
+                }
+            ],
+            "produces": [
+                "application/json"
+            ],
+            "responses": {
+                "201": {
+                    "description": "Label Created Successfully"
+                },
+                "400": {
+                    "description": "Wrong Input Validations or Failed Create Label"
+                },
+                "401": {
+                    "description": "Your token has expiered"
+                },
+                "500": {
+                    "description": "Internal server error"
+                }
+            }
+        }
     }
 },
     "definitions": {
@@ -437,6 +481,18 @@
             "example": {
                 "title": " title",
                 "description": "description"
+            }
+        },
+        "labes": {
+            "type": "object",
+            "properties": {
+                "labelName": {
+                    "type": "string"
+                }
+            },
+            "example": {
+                "labelName": " label_Name"
+                
             }
         }
     }
