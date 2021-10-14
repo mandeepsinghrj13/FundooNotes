@@ -448,6 +448,49 @@
                 }
             }
         }
+    },
+    "/getlabel/{id}": {
+        "get": {
+            "tags": [
+                "Get Label By Id"
+            ],
+            "description": "Get label by ID",
+            "parameters": [
+                {
+                    "in": "header",
+                    "name": "Authorization",
+                    "description": "Token for vaidation",
+                    "schema": {
+                        "type": "string"
+                    }
+                },
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description": "Id of label you want to Get",
+                    "schema": {
+                        "type": "string"
+                    }
+                }
+            ],
+            "produces": [
+                "application/json"
+            ],
+            "responses": {
+                "200": {
+                    "description": "Label Found Successfully"
+                },
+                "400": {
+                    "description": "Wrong Input Validations"
+                },
+                "401": {
+                    "description": "Your token has expiered Or Enter Valid Token"
+                },
+                "500": {
+                    "description": "Internal server error"
+                }
+            }
+        }
     }
 },
     "definitions": {
