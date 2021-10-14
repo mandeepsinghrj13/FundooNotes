@@ -491,6 +491,57 @@
                 }
             }
         }
+    },
+    "/updatelabel/{id}": {
+        "put": {
+            "tags": [
+                "Update Label By Id"
+            ],
+            "description": "put label by ID",
+            "parameters": [
+                {
+                    "in": "header",
+                    "name": "Authorization",
+                    "description": "Token for vaidation",
+                    "schema": {
+                        "type": "string"
+                    }
+                },
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description": "Id of label you want to update",
+                    "schema": {
+                        "type": "string"
+                    }
+                },
+                {
+                    "name": "update label",
+                    "in": "body",
+                    "description": "label body",
+                    "schema": {
+                        "$ref": "#/definitions/labes"
+                    }
+                }
+            ],
+            "produces": [
+                "application/json"
+            ],
+            "responses": {
+                "201": {
+                    "description": "Label Updated Successfully"
+                },
+                "400": {
+                    "description": "Wrong Input Validations or Label Id Is Not Match"
+                },
+                "401": {
+                    "description": "Your token has expiered"
+                },
+                "500": {
+                    "description": "Internal server error"
+                }
+            }
+        }
     }
 },
     "definitions": {
