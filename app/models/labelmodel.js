@@ -70,5 +70,20 @@ class LabelModel {
         .catch(() => reject());
     });
   };
+
+  /**
+   * deleteLabelById
+   * @param {*} id
+   * @returns
+   */
+  deleteLabelById = async (id) => {
+    try {
+      return await Label.findOneAndDelete({
+        $and: [{ _id: id.labelId }, { userId: id.userId }],
+      });
+    } catch (err) {
+      return err;
+    }
+  };
 }
 module.exports = new LabelModel();

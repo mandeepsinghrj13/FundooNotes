@@ -51,5 +51,18 @@ class LabelService {
       .then((data) => resolve(data))
       .catch(() => reject());
   };
+
+  /**
+   * deleteLabelById
+   * @param {*} id
+   * @returns
+   */
+  deleteLabelById = async (id) => {
+    try {
+      return await labelModel.deleteLabelById(id);
+    } catch (err) {
+      return err;
+    }
+  };
 }
 module.exports = new LabelService();

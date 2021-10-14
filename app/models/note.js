@@ -83,9 +83,14 @@ class Model {
     });
   };
 
+  /**
+   * deleteNoteById
+   * @param {*} id
+   * @returns
+   */
   deleteNoteById = async (id) => {
     try {
-      return await Note.findOneAndDelete({ _id: id.noteId, userId: id.userId });
+      return await Note.findOneAndDelete({ $and: [{ _id: id.noteId }, { userId: id.userId }] });
     } catch (err) {
       return err;
     }

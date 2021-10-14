@@ -54,6 +54,11 @@ class Service {
       .catch(() => reject());
   };
 
+  /**
+   * deleteNoteById
+   * @param {*} id
+   * @returns
+   */
   deleteNoteById = async (id) => {
     try {
       return await noteModel.deleteNoteById(id);

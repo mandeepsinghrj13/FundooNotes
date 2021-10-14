@@ -64,7 +64,8 @@ class Validation {
   });
 
   DeleteNoteById = Joi.object({
-    id: Joi.string().required(),
+    userId: Joi.string().required(),
+    noteId: Joi.string().required(),
   });
 
   createLabel = Joi.object({
@@ -85,6 +86,11 @@ class Validation {
     id: Joi.string().required(),
     userId: Joi.string().required(),
     labelName: Joi.string().required(),
+  });
+
+  DeleteLabelById = Joi.object({
+    userId: Joi.string().required(),
+    labelId: Joi.string().required(),
   });
 }
 module.exports = new Validation();

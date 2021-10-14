@@ -191,37 +191,42 @@ class Note {
     }
   };
 
+  /**
+   * deleteNoteById
+   * @param {*} req
+   * @param {*} res
+   * @returns
+   */
   deleteNoteById = async (req, res) => {
     try {
       const id = { userId: req.userData.id, noteId: req.params.id };
       // check validation user body
-      const validationDeleteNoteById = validation.DeleteNoteById.validate(id);
+      const validationDeleteNote = validation.DeleteNoteById.validate(id);
 
-      if (validationDeleteNoteById.error) {
+      if (validationDeleteNote.error) {
         logger.error("Wrong Input Validations");
         return res.status(400).send({
           success: false,
           message: "Wrong Input Validations",
-          data: validationDeleteNoteById,
+          data: validationDeleteNote,
         });
       }
       const data = await noteService.deleteNoteById(id);
-      if (data) {
+      if (data.message) {
         return res.status(404).json({
           message: "Note not found",
           success: false,
         });
       }
-      logger.info("Note Delete succesfully");
       return res.status(200).json({
+        message: "Note Deleted succesfully",
         success: true,
-        message: "Note Delete succesfully",
         data: data,
       });
     } catch (err) {
       return res.status(500).json({
+        message: "Note not updated",
         success: false,
-        message: "Internal server error",
         data: err,
       });
     }
