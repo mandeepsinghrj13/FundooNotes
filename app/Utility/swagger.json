@@ -261,7 +261,7 @@
                 {
                     "name": "id",
                     "in": "path",
-                    "description": "Id of note you want to update",
+                    "description": "Id of note you want to Get",
                     "schema": {
                         "type": "string"
                     }
@@ -349,7 +349,7 @@
                 {
                     "name": "id",
                     "in": "path",
-                    "description": "Id of note you want to update",
+                    "description": "Id of note you want to delete",
                     "schema": {
                         "type": "string"
                     }
@@ -536,6 +536,49 @@
                 },
                 "401": {
                     "description": "Your token has expiered"
+                },
+                "500": {
+                    "description": "Internal server error"
+                }
+            }
+        }
+    },
+    "/deletelabel/{id}": {
+        "delete": {
+            "tags": [
+                "Delete Label By Id"
+            ],
+            "description": "delete label by ID",
+            "parameters": [
+                {
+                    "in": "header",
+                    "name": "Authorization",
+                    "description": "Token for vaidation",
+                    "schema": {
+                        "type": "string"
+                    }
+                },
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description": "Id of label you want to delete",
+                    "schema": {
+                        "type": "string"
+                    }
+                }
+            ],
+            "produces": [
+                "application/json"
+            ],
+            "responses": {
+                "200": {
+                    "description": "label Deleted succesfully"
+                },
+                "400": {
+                    "description": "Wrong Input Validations or Label Id Is Not Match"
+                },
+                "401": {
+                    "description": "Your token has expiered Or Enter Valid Token"
                 },
                 "500": {
                     "description": "Internal server error"

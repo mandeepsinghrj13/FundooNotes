@@ -209,7 +209,7 @@ class Labels {
       }
       const data = await labelService.deleteLabelById(id);
       if (data.message) {
-        return res.status(404).json({
+        return res.status(400).json({
           message: "label not found",
           success: false,
         });
@@ -221,7 +221,7 @@ class Labels {
       });
     } catch (err) {
       return res.status(500).json({
-        message: "label not deleted",
+        message: "Internal server error",
         success: false,
         data: err,
       });
