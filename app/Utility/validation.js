@@ -93,6 +93,11 @@ class Validation {
     labelId: Joi.string().required(),
   });
 
+  addLabelToNote = Joi.object({
+    notesId: Joi.string().required(),
+    labelId: Joi.string().required(),
+  });
+
   DeleteLabel = Joi.object({
     notesId: Joi.string().required(),
     labelId: Joi.string().required(),

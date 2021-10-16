@@ -245,6 +245,17 @@ class Note {
       };
       console.log(notesId, "241");
       console.log(labelData, "242");
+      // check validation user body
+      const validationAddLabel = validation.addLabelToNote.validate(req.body);
+
+      if (validationAddLabel.error) {
+        logger.error("Wrong Input Validations");
+        return res.status(400).send({
+          success: false,
+          message: "Wrong Input Validations",
+          data: validationAddLabel,
+        });
+      }
       const addLabelName = await noteService.addLabelToNote(notesId, labelData);
       res.send({
         success: true,
@@ -262,18 +273,11 @@ class Note {
 
   async deleteLabelFromNote(req, res) {
     try {
-      // let dataValidation = addingRemovingLabelValidation.validate(req.body);
-      // if (dataValidation.error) {
-      //   return res.status(400).send({
-      //     message: dataValidation.error.details[0].message,
-      //   });
-      // }
-      // check validation user body
-
       const notesId = req.body.notesId;
       const labelData = {
         labelId: [req.body.labelId],
       };
+      // check validation user body
       const validationDeleteLabel = validation.DeleteLabel.validate(req.body);
 
       if (validationDeleteLabel.error) {
