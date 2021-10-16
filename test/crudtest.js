@@ -397,3 +397,70 @@ describe("delete note by id api for positive and negative test case", () => {
       });
   });
 });
+
+describe("add label into note api for positive and negative test case", () => {
+  it.only("GivenAddLabelToNoteDetails_When_AddedNote_Successfully", (done) => {
+    const token = noteInputs.notes.loginValidToken;
+    const addLabelIntoNote = noteInputs.notes.NotesIdAndLabelId;
+    chai
+      .request(server)
+      .put("/addLabel")
+      .set({ authorization: token })
+      .send(addLabelIntoNote)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        res.should.have.status(200);
+        done();
+      });
+  });
+  it.only("GivenAddLabelToNoteDetails_When_AddNote_TokenExpiered", (done) => {
+    const token = noteInputs.notes.TokenExpiered;
+    const addLabelIntoNote = noteInputs.notes.NotesIdAndLabelId;
+    chai
+      .request(server)
+      .put("/addLabel")
+      .set({ authorization: token })
+      .send(addLabelIntoNote)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        res.should.have.status(401);
+        done();
+      });
+  });
+  it.only("GivenAddLabelToNoteDetails_When_NotesId_And_LabelId_Is_Empty", (done) => {
+    const token = noteInputs.notes.loginValidToken;
+    const addLabelIntoNote = noteInputs.notes.NotesIdAndLabelIdIsEmpty;
+    chai
+      .request(server)
+      .put("/addLabel")
+      .set({ authorization: token })
+      .send(addLabelIntoNote)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        res.should.have.status(200);
+        done();
+      });
+  });
+  it.only("GivenAddLabelToNoteDetails_When_TokenExpiered_NotesId_And_LabelId_Is_Empty", (done) => {
+    const token = noteInputs.notes.TokenExpiered;
+    const addLabelIntoNote = noteInputs.notes.NotesIdAndLabelIdIsEmpty;
+    chai
+      .request(server)
+      .put("/addLabel")
+      .set({ authorization: token })
+      .send(addLabelIntoNote)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        res.should.have.status(401);
+        done();
+      });
+  });
+});

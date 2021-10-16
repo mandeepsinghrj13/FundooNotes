@@ -15,6 +15,14 @@
     "UpdateById_EmptyId":"",
     "DeleteById":"616998db5d69407583466b12",
     "DeleteById_InvalidId":"6166f0f1dcfc911508e7893m",
-    "DeleteById_EmptyId":""
+    "DeleteById_EmptyId":"",
+    "NotesIdAndLabelId":{
+        "notesId":"61641fae1060ef55e924c72f",
+        "labelId":"61683a6bf3ef0df940a92953"
+    },
+    "NotesIdAndLabelIdIsEmpty":{
+        "notesId":"",
+        "labelId":""
+    }
 }
 }
