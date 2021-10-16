@@ -80,5 +80,13 @@ class Service {
       return error;
     }
   }
+
+  async deleteLabelFromNote(notesId, labelData) {
+    try {
+      return await noteModel.deleteLabelFromNote(notesId, labelData);
+    } catch (error) {
+      return error;
+    }
+  }
 }
 module.exports = new Service();

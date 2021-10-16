@@ -117,5 +117,17 @@ class Model {
       return error;
     }
   }
+
+  async deleteLabelFromNote(notesId, labelData) {
+    try {
+      return await Note.findByIdAndUpdate(
+        notesId,
+        { $pull: { labels: labelData.labelId[0] } },
+        { new: true }
+      );
+    } catch (error) {
+      return error;
+    }
+  }
 }
 module.exports = new Model();

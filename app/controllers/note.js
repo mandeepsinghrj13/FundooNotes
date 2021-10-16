@@ -259,5 +259,44 @@ class Note {
       });
     }
   }
+
+  async deleteLabelFromNote(req, res) {
+    try {
+      // let dataValidation = addingRemovingLabelValidation.validate(req.body);
+      // if (dataValidation.error) {
+      //   return res.status(400).send({
+      //     message: dataValidation.error.details[0].message,
+      //   });
+      // }
+      // check validation user body
+
+      const notesId = req.body.notesId;
+      const labelData = {
+        labelId: [req.body.labelId],
+      };
+      const validationDeleteLabel = validation.DeleteLabel.validate(req.body);
+
+      if (validationDeleteLabel.error) {
+        logger.error("Wrong Input Validations");
+        return res.status(400).send({
+          success: false,
+          message: "Wrong Input Validations",
+          data: validationDeleteLabel,
+        });
+      }
+      const addLabelName = await noteService.deleteLabelFromNote(notesId, labelData);
+      res.send({
+        success: true,
+        message: "Label Deleted Into Note",
+        data: addLabelName,
+      });
+    } catch (error) {
+      console.log(error);
+      res.status(500).send({
+        success: false,
+        message: "Some error occurred while deleting label from notes",
+      });
+    }
+  }
 }
 module.exports = new Note();
