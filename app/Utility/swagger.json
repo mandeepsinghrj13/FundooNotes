@@ -585,6 +585,46 @@
                 }
             }
         }
+    },
+    "/addLabel": {
+        "put": {
+            "tags": [
+                "Add Label To Note"
+            ],
+            "description": "add label into note",
+            "parameters": [
+                {
+                    "in": "header",
+                    "name": "Authorization",
+                    "description": "Token for vaidation",
+                    "schema": {
+                        "type": "string"
+                    }
+                },
+                {
+                    "name": "labelId",
+                    "in": "body",
+                    "description": "labelId body",
+                    "schema": {
+                        "$ref": "#/definitions/LabelToNote"
+                    }
+                }
+            ],
+            "produces": [
+                "application/json"
+            ],
+            "responses": {
+                "201": {
+                    "description": "Label Added Into Note"
+                },
+                "401": {
+                    "description": "Your token has expiered Or Enter Valid Token"
+                },
+                "500": {
+                    "description": "Internal server error"
+                }
+            }
+        }
     }
 },
     "definitions": {
@@ -664,6 +704,17 @@
             "example": {
                 "labelName": " label_Name"
                 
+            }
+        },
+        "LabelToNote": {
+            "type": "object",
+            "properties": {
+                "notesId": {
+                    "type":"string"
+                },
+                "labelId": {
+                    "type":"string"
+                }
             }
         }
     }
