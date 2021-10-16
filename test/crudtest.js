@@ -399,7 +399,7 @@ describe("delete note by id api for positive and negative test case", () => {
 });
 
 describe("add label into note api for positive and negative test case", () => {
-  it.only("GivenAddLabelToNoteDetails_When_AddedNote_Successfully", (done) => {
+  it("GivenAddLabelToNoteDetails_When_AddedNote_Successfully", (done) => {
     const token = noteInputs.notes.loginValidToken;
     const addLabelIntoNote = noteInputs.notes.NotesIdAndLabelId;
     chai
@@ -431,7 +431,7 @@ describe("add label into note api for positive and negative test case", () => {
         done();
       });
   });
-  it.only("GivenAddLabelToNoteDetails_When_NotesId_And_LabelId_Is_Empty", (done) => {
+  it("GivenAddLabelToNoteDetails_When_NotesId_And_LabelId_Is_Empty", (done) => {
     const token = noteInputs.notes.loginValidToken;
     const addLabelIntoNote = noteInputs.notes.NotesIdAndLabelIdIsEmpty;
     chai
@@ -447,12 +447,79 @@ describe("add label into note api for positive and negative test case", () => {
         done();
       });
   });
-  it.only("GivenAddLabelToNoteDetails_When_TokenExpiered_NotesId_And_LabelId_Is_Empty", (done) => {
+  it("GivenAddLabelToNoteDetails_When_TokenExpiered_NotesId_And_LabelId_Is_Empty", (done) => {
     const token = noteInputs.notes.TokenExpiered;
     const addLabelIntoNote = noteInputs.notes.NotesIdAndLabelIdIsEmpty;
     chai
       .request(server)
       .put("/addLabel")
+      .set({ authorization: token })
+      .send(addLabelIntoNote)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        res.should.have.status(401);
+        done();
+      });
+  });
+});
+
+describe("delete label into note api for positive and negative test case", () => {
+  it.skip("GivenDeleteLabelToNoteDetails_When_Delete_Successfully", (done) => {
+    const token = noteInputs.notes.loginValidToken;
+    const addLabelIntoNote = noteInputs.notes.NotesIdLabelId;
+    chai
+      .request(server)
+      .delete("/deleteLabel")
+      .set({ authorization: token })
+      .send(addLabelIntoNote)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        res.should.have.status(200);
+        done();
+      });
+  });
+  it.only("GivenDeleteLabelToNoteDetails_When_Note_Id_Is_Empty", (done) => {
+    const token = noteInputs.notes.loginValidToken;
+    const addLabelIntoNote = noteInputs.notes.NotesIdEmpty;
+    chai
+      .request(server)
+      .delete("/deleteLabel")
+      .set({ authorization: token })
+      .send(addLabelIntoNote)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        res.should.have.status(400);
+        done();
+      });
+  });
+  it.only("GivenDeleteLabelToNoteDetails_When_Label_Id_Is_Empty", (done) => {
+    const token = noteInputs.notes.loginValidToken;
+    const addLabelIntoNote = noteInputs.notes.LabelIdEmpty;
+    chai
+      .request(server)
+      .delete("/deleteLabel")
+      .set({ authorization: token })
+      .send(addLabelIntoNote)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        res.should.have.status(400);
+        done();
+      });
+  });
+  it.only("GivenDeleteLabelToNoteDetails_When_Token_Was_Expiered", (done) => {
+    const token = noteInputs.notes.TokenExpiered;
+    const addLabelIntoNote = noteInputs.notes.LabelIdEmpty;
+    chai
+      .request(server)
+      .delete("/deleteLabel")
       .set({ authorization: token })
       .send(addLabelIntoNote)
       .end((err, res) => {
