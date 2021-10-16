@@ -380,38 +380,6 @@ describe("delete note by id api for positive and negative test case", () => {
         done();
       });
   });
-  it("GivenGetNoteByIdDetails_When_Token_And_Id_Both_Are_Ok", (done) => {
-    const token = noteInputs.notes.loginValidToken;
-    const id = noteInputs.notes.DeleteById;
-    chai
-      .request(server)
-      .delete(`/deletenote/${id}`)
-      .set({ authorization: token })
-
-      .end((err, res) => {
-        if (err) {
-          return done(err);
-        }
-        res.should.have.status(400);
-        done();
-      });
-  });
-  it("GivenGetNoteByIdDetails_When_Id_Is_Invalid", (done) => {
-    const token = noteInputs.notes.loginValidToken;
-    const id = noteInputs.notes.DeleteById_InvalidId;
-    chai
-      .request(server)
-      .delete(`/deletenote/${id}`)
-      .set({ authorization: token })
-
-      .end((err, res) => {
-        if (err) {
-          return done(err);
-        }
-        res.should.have.status(400);
-        done();
-      });
-  });
   it("GivenGetNoteByIdDetails_When_Id_Has_Empty", (done) => {
     const token = noteInputs.notes.loginValidToken;
     const id = noteInputs.notes.DeleteById_EmptyId;

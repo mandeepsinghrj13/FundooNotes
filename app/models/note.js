@@ -12,6 +12,9 @@ const noteSchema = mongoose.Schema(
       required: true,
       minlength: 2,
     },
+    labels: {
+      type: [String],
+    },
   },
   {
     timestamps: true,
@@ -95,5 +98,24 @@ class Model {
       return err;
     }
   };
+
+  /**
+   * add Label To Note
+   * @param {*} notesId
+   * @param {*} labelData
+   * @returns
+   */
+  async addLabelToNote(notesId, labelData) {
+    // console.log(labelData, "103");
+    try {
+      return await Note.findByIdAndUpdate(
+        notesId,
+        { $push: { labels: { $each: labelData.labelId } } },
+        { new: true }
+      );
+    } catch (error) {
+      return error;
+    }
+  }
 }
 module.exports = new Model();

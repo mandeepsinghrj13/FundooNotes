@@ -66,7 +66,7 @@ describe("create label api for positive and negative test case", () => {
 });
 
 describe("get all label api for positive and negative test case", () => {
-  it.only("GivenGetAllLabelDetails_When_Label_GetAll_Successfully", (done) => {
+  it("GivenGetAllLabelDetails_When_Label_GetAll_Successfully", (done) => {
     const token = labelInputs.label.loginValidToken;
     chai
       .request(server)
@@ -248,7 +248,7 @@ describe("delete label by id api for positive and negative test case", () => {
         done();
       });
   });
-  it.only("GivenDeleteLabelByIdDetails_When_Label_Id_Empty", (done) => {
+  it("GivenDeleteLabelByIdDetails_When_Label_Id_Empty", (done) => {
     const token = labelInputs.label.loginValidToken;
     const id = labelInputs.label.EmptyId;
     chai

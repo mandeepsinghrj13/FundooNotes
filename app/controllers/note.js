@@ -231,5 +231,33 @@ class Note {
       });
     }
   };
+
+  /**
+   * add Label To Note
+   * @param {*} req
+   * @param {*} res
+   */
+  async addLabelToNote(req, res) {
+    try {
+      const notesId = req.body.notesId;
+      const labelData = {
+        labelId: [req.body.labelId],
+      };
+      console.log(notesId, "241");
+      console.log(labelData, "242");
+      const addLabelName = await noteService.addLabelToNote(notesId, labelData);
+      res.send({
+        success: true,
+        message: "Label Added Into Note",
+        data: addLabelName,
+      });
+    } catch (error) {
+      console.log(error);
+      res.status(500).send({
+        success: false,
+        message: "Some error while adding label to notes",
+      });
+    }
+  }
 }
 module.exports = new Note();

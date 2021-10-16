@@ -66,5 +66,19 @@ class Service {
       return err;
     }
   };
+
+  /**
+   * add Label To Note
+   * @param {*} notesId
+   * @param {*} labelData
+   * @returns
+   */
+  async addLabelToNote(notesId, labelData) {
+    try {
+      return await noteModel.addLabelToNote(notesId, labelData);
+    } catch (error) {
+      return error;
+    }
+  }
 }
 module.exports = new Service();

@@ -6,6 +6,9 @@ const labelSchema = mongoose.Schema(
     labelName: {
       type: String,
     },
+    notesId: {
+      type: String,
+    },
   },
   {
     timestamps: true,
