@@ -1,4 +1,5 @@
 const labelModel = require("../models/labelmodel");
+const redisjs = require("../Utility/redis");
 class LabelService {
   /**
    * createLabel
@@ -22,7 +23,10 @@ class LabelService {
   getLabel = (id, resolve, reject) => {
     labelModel
       .getLabel(id)
-      .then((data) => resolve(data))
+      .then((data) => {
+        redisjs.setData("getAllLabels", 120, JSON.stringify(data));
+        resolve(data);
+      })
       .catch(() => reject());
   };
 
@@ -35,7 +39,10 @@ class LabelService {
   getLabelById = (id, resolve, reject) => {
     labelModel
       .getLabelById(id)
-      .then((data) => resolve(data))
+      .then((data) => {
+        redisjs.setData("getLabelById", 180, JSON.stringify(data));
+        resolve(data);
+      })
       .catch(() => reject());
   };
 
@@ -48,7 +55,10 @@ class LabelService {
   updateLabelById = (updateLabel, resolve, reject) => {
     labelModel
       .updateLabelById(updateLabel)
-      .then((data) => resolve(data))
+      .then((data) => {
+        redisjs.clearCache("updateLabelById");
+        resolve(data);
+      })
       .catch(() => reject());
   };
 

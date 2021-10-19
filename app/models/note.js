@@ -106,7 +106,6 @@ class Model {
    * @returns
    */
   async addLabelToNote(notesId, labelData) {
-    // console.log(labelData, "103");
     try {
       return await Note.findByIdAndUpdate(
         notesId,

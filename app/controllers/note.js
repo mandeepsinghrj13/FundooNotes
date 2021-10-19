@@ -1,6 +1,7 @@
 const noteService = require("../service/note");
 const logger = require("../Utility/logger");
 const validation = require("../Utility/validation.js");
+// const redisjs = require("../Utility/redis");
 
 class Note {
   /**
@@ -73,10 +74,11 @@ class Note {
           data: validationGetNote,
         });
       }
+
       noteService.getNote(id, resolve, reject);
       function resolve(data) {
         logger.info("Get All Notes successfully");
-        return res.status(201).json({
+        return res.status(200).json({
           message: "Get All Notes successfully",
           success: true,
           data: data,
@@ -169,7 +171,7 @@ class Note {
       noteService.updateNoteById(updateNote, resolve, reject);
       function resolve(data) {
         logger.info("Note Updated Successfully");
-        return res.status(201).send({
+        return res.status(201).json({
           message: "Note Updated Successfully",
           success: true,
           data: data,
@@ -243,8 +245,7 @@ class Note {
       const labelData = {
         labelId: [req.body.labelId],
       };
-      console.log(notesId, "241");
-      console.log(labelData, "242");
+
       // check validation user body
       const validationAddLabel = validation.addLabelToNote.validate(req.body);
 

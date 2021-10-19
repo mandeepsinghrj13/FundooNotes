@@ -116,8 +116,7 @@ class Controller {
       };
 
       // forgetPassword validation
-      const validationforgetPassword =
-        validation.authUserforgetPassword.validate(user);
+      const validationforgetPassword = validation.authUserforgetPassword.validate(user);
 
       if (validationforgetPassword.error) {
         logger.error("Wrong Input Validations");
@@ -137,6 +136,7 @@ class Controller {
             error,
           });
         } else {
+          redisjs.getData("getnotes", 60, JSON.stringify(data));
           logger.info("Email Send Successfully");
           res.status(200).json({
             success: true,
@@ -169,8 +169,7 @@ class Controller {
         newPassword: req.body.Password,
       };
       // check validation user body
-      const validationforgetPassword =
-        validation.authUserresetPassword.validate(resetInfo);
+      const validationforgetPassword = validation.authUserresetPassword.validate(resetInfo);
 
       if (validationforgetPassword.error) {
         logger.error("Wrong Input Validations");

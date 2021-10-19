@@ -1,5 +1,5 @@
-// const logger = require("../Utility/logger");
 const noteModel = require("../models/note");
+const redisjs = require("../Utility/redis");
 class Service {
   /**
    * createNote
@@ -24,7 +24,10 @@ class Service {
   getNote = (id, resolve, reject) => {
     noteModel
       .getNote(id)
-      .then((data) => resolve(data))
+      .then((data) => {
+        redisjs.setData("getAllNotes", 120, JSON.stringify(data));
+        resolve(data);
+      })
       .catch(() => reject());
   };
 
@@ -37,7 +40,10 @@ class Service {
   getNoteById = (id, resolve, reject) => {
     noteModel
       .getNoteById(id)
-      .then((data) => resolve(data))
+      .then((data) => {
+        redisjs.setData("getById", 180, JSON.stringify(data));
+        resolve(data);
+      })
       .catch(() => reject());
   };
 
@@ -50,7 +56,10 @@ class Service {
   updateNoteById = (updateNote, resolve, reject) => {
     noteModel
       .updateNoteById(updateNote)
-      .then((data) => resolve(data))
+      .then((data) => {
+        redisjs.clearCache("updateNoteById");
+        resolve(data);
+      })
       .catch(() => reject());
   };
 
@@ -81,6 +90,12 @@ class Service {
     }
   }
 
+  /**
+   * deleteLabelFromNote
+   * @param {*} notesId
+   * @param {*} labelData
+   * @returns
+   */
   async deleteLabelFromNote(notesId, labelData) {
     try {
       return await noteModel.deleteLabelFromNote(notesId, labelData);
