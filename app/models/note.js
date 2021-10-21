@@ -107,11 +107,7 @@ class Model {
    */
   async addLabelToNote(notesId, labelData) {
     try {
-      return await Note.findByIdAndUpdate(
-        notesId,
-        { $push: { labels: { $each: labelData.labelId } } },
-        { new: true }
-      );
+      return await Note.findByIdAndUpdate(notesId, { $push: { labels: { $each: labelData.labelId } } }, { new: true });
     } catch (error) {
       return error;
     }
@@ -119,11 +115,7 @@ class Model {
 
   async deleteLabelFromNote(notesId, labelData) {
     try {
-      return await Note.findByIdAndUpdate(
-        notesId,
-        { $pull: { labels: labelData.labelId[0] } },
-        { new: true }
-      );
+      return await Note.findByIdAndUpdate(notesId, { $pull: { labels: labelData.labelId[0] } }, { new: true });
     } catch (error) {
       return error;
     }

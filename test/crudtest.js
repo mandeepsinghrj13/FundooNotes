@@ -76,7 +76,7 @@ describe("get all note api for positive and negative test case", () => {
         if (err) {
           return done(err);
         }
-        res.should.have.status(201);
+        res.should.have.status(200);
         done();
       });
   });
@@ -333,7 +333,7 @@ describe("update note by id api for positive and negative test case", () => {
   });
 });
 describe("delete note by id api for positive and negative test case", () => {
-  it("GivenDeleteNoteByIdDetails_When_Note_Deleted_Successfully", (done) => {
+  it.skip("GivenDeleteNoteByIdDetails_When_Note_Deleted_Successfully", (done) => {
     const token = noteInputs.notes.loginValidToken;
     const id = noteInputs.notes.DeleteById;
     chai
@@ -415,7 +415,7 @@ describe("add label into note api for positive and negative test case", () => {
         done();
       });
   });
-  it.only("GivenAddLabelToNoteDetails_When_AddNote_TokenExpiered", (done) => {
+  it("GivenAddLabelToNoteDetails_When_AddNote_TokenExpiered", (done) => {
     const token = noteInputs.notes.TokenExpiered;
     const addLabelIntoNote = noteInputs.notes.NotesIdAndLabelId;
     chai
@@ -443,7 +443,7 @@ describe("add label into note api for positive and negative test case", () => {
         if (err) {
           return done(err);
         }
-        res.should.have.status(200);
+        res.should.have.status(400);
         done();
       });
   });
@@ -482,7 +482,7 @@ describe("delete label into note api for positive and negative test case", () =>
         done();
       });
   });
-  it.only("GivenDeleteLabelToNoteDetails_When_Note_Id_Is_Empty", (done) => {
+  it("GivenDeleteLabelToNoteDetails_When_Note_Id_Is_Empty", (done) => {
     const token = noteInputs.notes.loginValidToken;
     const addLabelIntoNote = noteInputs.notes.NotesIdEmpty;
     chai
@@ -498,7 +498,7 @@ describe("delete label into note api for positive and negative test case", () =>
         done();
       });
   });
-  it.only("GivenDeleteLabelToNoteDetails_When_Label_Id_Is_Empty", (done) => {
+  it("GivenDeleteLabelToNoteDetails_When_Label_Id_Is_Empty", (done) => {
     const token = noteInputs.notes.loginValidToken;
     const addLabelIntoNote = noteInputs.notes.LabelIdEmpty;
     chai
@@ -514,7 +514,7 @@ describe("delete label into note api for positive and negative test case", () =>
         done();
       });
   });
-  it.only("GivenDeleteLabelToNoteDetails_When_Token_Was_Expiered", (done) => {
+  it("GivenDeleteLabelToNoteDetails_When_Token_Was_Expiered", (done) => {
     const token = noteInputs.notes.TokenExpiered;
     const addLabelIntoNote = noteInputs.notes.LabelIdEmpty;
     chai

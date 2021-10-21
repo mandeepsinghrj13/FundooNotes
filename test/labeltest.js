@@ -218,7 +218,7 @@ describe("update label by id api for positive and negative test case", () => {
 });
 
 describe("delete label by id api for positive and negative test case", () => {
-  it("GivendeleteLabelByIdDetails_When_Label_delete_Successfully", (done) => {
+  it.skip("GivendeleteLabelByIdDetails_When_Label_delete_Successfully", (done) => {
     const token = labelInputs.label.loginValidToken;
     const id = labelInputs.label.DeleteById;
     chai
@@ -259,7 +259,7 @@ describe("delete label by id api for positive and negative test case", () => {
         if (err) {
           return done(err);
         }
-        res.should.have.status(404);
+        res.should.have.status(400);
         done();
       });
   });

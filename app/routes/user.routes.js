@@ -14,8 +14,8 @@ module.exports = (app) => {
   app.post("/resetpassword", helper.verifyTokenforreset, controller.resetPassword);
   // Post createnotes
   app.post("/createnotes", helper.verifyToken, noteController.createNote);
-  // get all notes  with redis
-  app.get("/getnotes", helper.verifyToken, redisCache.redis, noteController.getNote);
+  // get all notes
+  app.get("/getnotes", helper.verifyToken, noteController.getNote);
   // get note by id   with redis
   app.get("/getnote/:id", helper.verifyToken, redisCache.redisGetById, noteController.getNoteById);
   // put update note by id
@@ -24,8 +24,8 @@ module.exports = (app) => {
   app.delete("/deletenote/:id", helper.verifyToken, noteController.deleteNoteById);
   // post create label
   app.post("/createlabel", helper.verifyToken, labelController.createLabel);
-  // get Get All label with redis
-  app.get("/getlabels", helper.verifyToken, redisCache.redisGetLabels, labelController.getLabel);
+  // get Get All label
+  app.get("/getlabels", helper.verifyToken, labelController.getLabel);
   // get Get label by id with redis
   app.get("/getlabel/:id", helper.verifyToken, redisCache.redisGetLabelById, labelController.getLabelById);
   // put update label by id

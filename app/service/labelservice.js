@@ -23,10 +23,7 @@ class LabelService {
   getLabel = (id, resolve, reject) => {
     labelModel
       .getLabel(id)
-      .then((data) => {
-        redisjs.setData("getAllLabels", 120, JSON.stringify(data));
-        resolve(data);
-      })
+      .then((data) => resolve(data))
       .catch(() => reject());
   };
 
@@ -56,7 +53,7 @@ class LabelService {
     labelModel
       .updateLabelById(updateLabel)
       .then((data) => {
-        redisjs.clearCache("updateLabelById");
+        redisjs.clearCache("getLabelById");
         resolve(data);
       })
       .catch(() => reject());

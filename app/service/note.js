@@ -24,10 +24,7 @@ class Service {
   getNote = (id, resolve, reject) => {
     noteModel
       .getNote(id)
-      .then((data) => {
-        redisjs.setData("getAllNotes", 120, JSON.stringify(data));
-        resolve(data);
-      })
+      .then((data) => resolve(data))
       .catch(() => reject());
   };
 
@@ -41,7 +38,7 @@ class Service {
     noteModel
       .getNoteById(id)
       .then((data) => {
-        redisjs.setData("getById", 180, JSON.stringify(data));
+        redisjs.setData("getNotesById", 60, JSON.stringify(data));
         resolve(data);
       })
       .catch(() => reject());
@@ -57,7 +54,7 @@ class Service {
     noteModel
       .updateNoteById(updateNote)
       .then((data) => {
-        redisjs.clearCache("updateNoteById");
+        redisjs.clearCache("getNotesById");
         resolve(data);
       })
       .catch(() => reject());

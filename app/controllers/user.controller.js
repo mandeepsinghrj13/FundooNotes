@@ -136,7 +136,6 @@ class Controller {
             error,
           });
         } else {
-          redisjs.getData("getnotes", 60, JSON.stringify(data));
           logger.info("Email Send Successfully");
           res.status(200).json({
             success: true,

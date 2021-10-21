@@ -477,8 +477,7 @@ describe("forgetpassword for positive and negative ", () => {
    * it function for forgetpassword when user email atlist two characters .
    */
   it("GivenForgetPasswordDetails_WhenNotProper_UserEmail_Atlist_TwoCharacters", (done) => {
-    const forgetPasswordDetails =
-      userInputs.forgetpassworduser.NotProperEmailJoiValidationAtListTwo;
+    const forgetPasswordDetails = userInputs.forgetpassworduser.NotProperEmailJoiValidationAtListTwo;
     chai
       .request(server)
       .post("/forgetPassword")
