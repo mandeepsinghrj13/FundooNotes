@@ -264,3 +264,88 @@ describe("delete label by id api for positive and negative test case", () => {
       });
   });
 });
+
+describe("get redis label by id api for positive and negative test case", () => {
+  it("GivenGetRedisLabelByIdDetails_When_Label_GetById_Successfully", (done) => {
+    const token = labelInputs.label.loginValidToken;
+    const id = labelInputs.label.RedisGetById;
+    chai
+      .request(server)
+      .get(`/getlabel/${id}`)
+      .set({ authorization: token })
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        res.should.have.status(200);
+        done();
+      });
+  });
+  it("GivenGetRedisLabelByIdDetails_When_RedisLabel_SortTime_GetById_Successfully", (done) => {
+    const token = labelInputs.label.loginValidToken;
+    const id = labelInputs.label.RedisGetById;
+    chai
+      .request(server)
+      .get(`/getlabel/${id}`)
+      .set({ authorization: token })
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        res.should.have.status(200);
+        done();
+      });
+  });
+});
+
+describe("update redis label by id api for positive and negative test case", () => {
+  it("GivenUpdateRedisLabelByIdDetails_When_Label_Update_Successfully", (done) => {
+    const token = labelInputs.label.loginValidToken;
+    const id = labelInputs.label.RedisUpdateById;
+    const createLabel = {
+      labelName: faker.lorem.word(),
+    };
+    chai
+      .request(server)
+      .put(`/updatelabel/${id}`)
+      .set({ authorization: token })
+      .send(createLabel)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        res.should.have.status(201);
+        done();
+      });
+  });
+  it("GivenGetRedisLabelByIdDetails_When_Label_GetById_Successfully", (done) => {
+    const token = labelInputs.label.loginValidToken;
+    const id = labelInputs.label.RedisUpdateById;
+    chai
+      .request(server)
+      .get(`/getlabel/${id}`)
+      .set({ authorization: token })
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        res.should.have.status(200);
+        done();
+      });
+  });
+  it("GivenGetRedisLabelByIdDetails_When_RedisLabel_SortTime_GetById_Successfully", (done) => {
+    const token = labelInputs.label.loginValidToken;
+    const id = labelInputs.label.RedisUpdateById;
+    chai
+      .request(server)
+      .get(`/getlabel/${id}`)
+      .set({ authorization: token })
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        res.should.have.status(200);
+        done();
+      });
+  });
+});

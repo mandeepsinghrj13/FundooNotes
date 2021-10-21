@@ -465,15 +465,14 @@ describe("add label into note api for positive and negative test case", () => {
   });
 });
 
-describe("delete label into note api for positive and negative test case", () => {
-  it.skip("GivenDeleteLabelToNoteDetails_When_Delete_Successfully", (done) => {
+describe("get redis note by id api for positive and negative test case", () => {
+  it("GivenGetRedisNoteByIdDetails_When_Note_Get_Successfully", (done) => {
     const token = noteInputs.notes.loginValidToken;
-    const addLabelIntoNote = noteInputs.notes.NotesIdLabelId;
+    const id = noteInputs.notes.GetRedisById;
     chai
       .request(server)
-      .delete("/deleteLabel")
+      .get(`/getnote/${id}`)
       .set({ authorization: token })
-      .send(addLabelIntoNote)
       .end((err, res) => {
         if (err) {
           return done(err);
@@ -482,51 +481,71 @@ describe("delete label into note api for positive and negative test case", () =>
         done();
       });
   });
-  it("GivenDeleteLabelToNoteDetails_When_Note_Id_Is_Empty", (done) => {
+  it("GivenGetRedisNoteByIdDetails_When_Note_RedisGet_SortTime_Successfully", (done) => {
     const token = noteInputs.notes.loginValidToken;
-    const addLabelIntoNote = noteInputs.notes.NotesIdEmpty;
+    const id = noteInputs.notes.GetRedisById;
     chai
       .request(server)
-      .delete("/deleteLabel")
+      .get(`/getnote/${id}`)
       .set({ authorization: token })
-      .send(addLabelIntoNote)
       .end((err, res) => {
         if (err) {
           return done(err);
         }
-        res.should.have.status(400);
+        res.should.have.status(200);
         done();
       });
   });
-  it("GivenDeleteLabelToNoteDetails_When_Label_Id_Is_Empty", (done) => {
+});
+
+describe("update redis note by id api for positive and negative test case", () => {
+  it("GivenUpdateRedisNoteByIdDetails_When_Note_Update_Successfully", (done) => {
     const token = noteInputs.notes.loginValidToken;
-    const addLabelIntoNote = noteInputs.notes.LabelIdEmpty;
+    const id = noteInputs.notes.RadisUpdateById;
+    const updateNote = {
+      title: faker.lorem.word(),
+      description: faker.lorem.sentence(),
+    };
     chai
       .request(server)
-      .delete("/deleteLabel")
+      .put(`/updatenotes/${id}`)
       .set({ authorization: token })
-      .send(addLabelIntoNote)
+      .send(updateNote)
       .end((err, res) => {
         if (err) {
           return done(err);
         }
-        res.should.have.status(400);
+        res.should.have.status(201);
         done();
       });
   });
-  it("GivenDeleteLabelToNoteDetails_When_Token_Was_Expiered", (done) => {
-    const token = noteInputs.notes.TokenExpiered;
-    const addLabelIntoNote = noteInputs.notes.LabelIdEmpty;
+  it("GivenGetRedisNoteByIdDetails_When_After_Update_Get_Successfully", (done) => {
+    const token = noteInputs.notes.loginValidToken;
+    const id = noteInputs.notes.AfterUpdateGetRedisById;
     chai
       .request(server)
-      .delete("/deleteLabel")
+      .get(`/getnote/${id}`)
       .set({ authorization: token })
-      .send(addLabelIntoNote)
       .end((err, res) => {
         if (err) {
           return done(err);
         }
-        res.should.have.status(401);
+        res.should.have.status(200);
+        done();
+      });
+  });
+  it("GivenGetRedisNoteByIdDetails_When_Note_After_Update_RedisGet_SortTime_Successfully", (done) => {
+    const token = noteInputs.notes.loginValidToken;
+    const id = noteInputs.notes.AfterUpdateGetRedisById;
+    chai
+      .request(server)
+      .get(`/getnote/${id}`)
+      .set({ authorization: token })
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        res.should.have.status(200);
         done();
       });
   });
