@@ -18,6 +18,7 @@
   "author": "callicoder",
   "license": "MIT",
   "dependencies": {
+    "amqplib": "^0.8.0",
     "bcrypt": "^5.0.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",

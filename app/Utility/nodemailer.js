@@ -1,3 +1,6 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable quotes */
+/* eslint-disable prefer-const */
 const nodemailer = require("nodemailer");
 const auth = require("../Utility/helper");
 const logger = require("./logger");
@@ -44,3 +47,26 @@ exports.sendEmail = (data) => {
     }
   });
 };
+class SendResetPassMail {
+  sendConfirmMail = (token, data) => {
+    const link = `http://localhost:${process.env.PORT}/confirmregister/${token}`;
+    // create reusable transporter object using the default SMTP transport
+    let transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.Email,
+        pass: process.env.Pass,
+      },
+    });
+
+    transporter.sendMail({
+      from: '"Fundoo Notes" <no-reply@fundoonotes.com>', // sender address
+      to: data.email, // list of receivers
+      subject: "Verify Your E-Mail - Fundoo notes account", // Subject line
+      text: `Hello ${data.firstName}.`, // plain text body
+      html: `<b>Hello ${data.firstName}. Here is your link to Verify Mail: <button href="${link}"> <a href="${link}">reset password</a></button></b>`, // html body
+    });
+  };
+}
+
+module.exports = new SendResetPassMail();

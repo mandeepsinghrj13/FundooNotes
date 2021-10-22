@@ -266,7 +266,7 @@ describe("delete label by id api for positive and negative test case", () => {
 });
 
 describe("get redis label by id api for positive and negative test case", () => {
-  it("GivenGetRedisLabelByIdDetails_When_Label_GetById_Successfully", (done) => {
+  it.only("GivenGetRedisLabelByIdDetails_When_Label_GetById_Successfully", (done) => {
     const token = labelInputs.label.loginValidToken;
     const id = labelInputs.label.RedisGetById;
     chai
@@ -281,7 +281,7 @@ describe("get redis label by id api for positive and negative test case", () => 
         done();
       });
   });
-  it("GivenGetRedisLabelByIdDetails_When_RedisLabel_SortTime_GetById_Successfully", (done) => {
+  it.only("GivenGetRedisLabelByIdDetails_When_RedisLabel_SortTime_GetById_Successfully", (done) => {
     const token = labelInputs.label.loginValidToken;
     const id = labelInputs.label.RedisGetById;
     chai
@@ -299,7 +299,7 @@ describe("get redis label by id api for positive and negative test case", () => 
 });
 
 describe("update redis label by id api for positive and negative test case", () => {
-  it("GivenUpdateRedisLabelByIdDetails_When_Label_Update_Successfully", (done) => {
+  it.only("GivenUpdateRedisLabelByIdDetails_When_Label_Update_Successfully", (done) => {
     const token = labelInputs.label.loginValidToken;
     const id = labelInputs.label.RedisUpdateById;
     const createLabel = {
@@ -318,7 +318,7 @@ describe("update redis label by id api for positive and negative test case", () 
         done();
       });
   });
-  it("GivenGetRedisLabelByIdDetails_When_Label_GetById_Successfully", (done) => {
+  it.only("GivenGetRedisLabelByIdDetails_When_Label_GetById_Successfully", (done) => {
     const token = labelInputs.label.loginValidToken;
     const id = labelInputs.label.RedisUpdateById;
     chai
@@ -333,7 +333,7 @@ describe("update redis label by id api for positive and negative test case", () 
         done();
       });
   });
-  it("GivenGetRedisLabelByIdDetails_When_RedisLabel_SortTime_GetById_Successfully", (done) => {
+  it.only("GivenGetRedisLabelByIdDetails_When_RedisLabel_SortTime_GetById_Successfully", (done) => {
     const token = labelInputs.label.loginValidToken;
     const id = labelInputs.label.RedisUpdateById;
     chai

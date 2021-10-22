@@ -1,3 +1,4 @@
+/* eslint-disable node/no-callback-literal */
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const logger = require("./logger");
@@ -20,6 +21,16 @@ class Helper {
       id: data.id,
     };
     return jwt.sign(dataForToken, sec, { expiresIn: "60m" });
+  };
+
+  jwtTokenGenerateforConfirm = (payload, secretkey, callback) => {
+    jwt.sign({ email: payload.email }, secretkey, { expiresIn: "5h" }, (err, token) => {
+      if (err) {
+        return callback("token not generated", null);
+      } else {
+        return callback(null, token);
+      }
+    });
   };
 
   /**

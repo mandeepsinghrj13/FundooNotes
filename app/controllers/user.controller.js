@@ -59,6 +59,36 @@ class Controller {
     }
   };
 
+  confirmRegister = (req, res) => {
+    try {
+      const data = {
+        token: req.params.token,
+      };
+      console.log("con 67: ", req.params.token);
+      userService.confirmRegister(data, (error, data) => {
+        console.log("con 69: ");
+        if (error) {
+          return res.json({
+            success: false,
+            message: "error",
+          });
+        } else {
+          return res.json({
+            success: true,
+            message: "Email Successfully Verified",
+            data: data,
+          });
+        }
+      });
+    } catch {
+      return res.json({
+        success: false,
+        data: null,
+        message: "server-error",
+      });
+    }
+  };
+
   // login start
   login = (req, res) => {
     try {

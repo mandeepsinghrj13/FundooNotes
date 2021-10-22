@@ -6,6 +6,8 @@ const redisCache = require("../Utility/redis");
 module.exports = (app) => {
   // Create a new Node
   app.post("/register", controller.register);
+  // Confirm Register
+  app.post("/confirmregister/:token", controller.confirmRegister);
   // Post login
   app.post("/login", controller.login);
   // Post forgetpassword

@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 /* eslint-disable new-cap */
 /* eslint-disable node/no-callback-literal */
 const mongoose = require("mongoose");
@@ -23,6 +24,10 @@ const userSchema = mongoose.Schema(
       type: String,
       required: true,
       minlength: 8,
+    },
+    verified: {
+      type: Boolean,
+      default: false,
     },
   },
   {
@@ -56,28 +61,65 @@ class userModel {
     });
   };
 
+  confirmRegister = (data, callback) => {
+    user.findOneAndUpdate(
+      { email: data.email },
+      {
+        verified: true,
+      },
+      (error, data) => {
+        if (error) {
+          logger.error("data not found in database");
+          return callback(error, null);
+        } else {
+          logger.info("data found in database");
+          return callback(null, data);
+        }
+      }
+    );
+  };
+
   // login
   /**
    * loginuser
    * @param {*} userDetails
    * @param {*} callback
    */
-  loginUser = (userDetails, callback) => {
-    user.findOne({ email: userDetails.email }, (error, data) => {
+
+  loginUser = (loginData, callback) => {
+    // Checking Email into database present or not
+    user.findOne({ email: loginData.email }, (error, data) => {
       if (error) {
-        logger.error("Error loggin user");
+        logger.error("data not found in database");
         return callback(error, null);
       } else {
-        if (!data) {
-          logger.error("Invalid User");
-          return callback(error, null);
-        } else {
-          logger.info("Email id found");
+        if (data.verified == true) {
+          logger.info("data found in database");
           return callback(null, data);
+        } else {
+          logger.info("data found in database but not verified");
+          return callback("not verified mail", null);
         }
       }
     });
   };
+
+  // loginUser = (userDetails, callback) => {
+  //   user.findOne({ email: userDetails.email }, (error, data) => {
+  //     if (error) {
+  //       logger.error("Error loggin user");
+  //       return callback(error, null);
+  //     } else {
+  //       if (!data) {
+  //         logger.error("Invalid User");
+  //         return callback(error, null);
+  //       } else {
+  //         logger.info("Email id found");
+  //         return callback(null, data);
+  //       }
+  //     }
+  //   });
+  // };
 
   // forgetPassword checking into database usingh findeOne() email there or not
   /**
@@ -112,18 +154,14 @@ class userModel {
       if (err) {
         throw err;
       } else {
-        user.findByIdAndUpdate(
-          resetInfo.id,
-          { Password: hashedPassword },
-          (error, data) => {
-            if (data) {
-              return callback(null, data);
-            } else {
-              logger.info(error);
-              return callback(error, null);
-            }
+        user.findByIdAndUpdate(resetInfo.id, { Password: hashedPassword }, (error, data) => {
+          if (data) {
+            return callback(null, data);
+          } else {
+            logger.info(error);
+            return callback(error, null);
           }
-        );
+        });
       }
     });
   };
