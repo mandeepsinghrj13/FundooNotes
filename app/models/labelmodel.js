@@ -55,7 +55,7 @@ class LabelModel {
    */
   getLabelById = (id) => {
     return new Promise((resolve, reject) => {
-      Label.find({ _id: id.noteId, userId: id.userId })
+      Label.findOne({ _id: id.noteId, userId: id.userId })
         .then((data) => resolve(data))
         .catch(() => reject());
     });
@@ -79,14 +79,23 @@ class LabelModel {
    * @param {*} id
    * @returns
    */
-  deleteLabelById = async (id) => {
-    try {
-      return await Label.findOneAndDelete({
-        $and: [{ _id: id.labelId }, { userId: id.userId }],
-      });
-    } catch (err) {
-      return err;
-    }
+  // deleteLabelById = async (id) => {
+  //   try {
+  //     return await Label.findOneAndDelete({
+  //       $and: [{ _id: id.labelId }, { userId: id.userId }],
+  //     });
+  //   } catch (err) {
+  //     return err;
+  //   }
+  // };
+  deleteLabelById = (notedata, callback) => {
+    Label.findOneAndDelete({ _id: notedata.labelId, userId: notedata.userId }, (error, data) => {
+      if (error) {
+        return callback(error, null);
+      } else {
+        return callback(null, data);
+      }
+    });
   };
 }
 module.exports = new LabelModel();

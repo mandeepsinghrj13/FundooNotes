@@ -132,7 +132,10 @@ class Note {
         });
       }
       function reject() {
-        return res.send();
+        logger.error("id note found");
+        return res.send({
+          message: "Id Note Found In Database",
+        });
       }
     } catch {
       logger.error("Internal server error");
@@ -213,21 +216,17 @@ class Note {
           data: validationDeleteNote,
         });
       }
-      const data = await noteService.deleteNoteById(id);
-      if (data.message) {
-        return res.status(404).json({
-          message: "Note not found",
-          success: false,
-        });
-      }
-      return res.status(200).json({
-        message: "Note Deleted succesfully",
-        success: true,
-        data: data,
+      await noteService.deleteNoteById(id, (error, data) => {
+        if (error) {
+          return res.send({ success: false, message: "Note Not Deleted!", data: error });
+        } else {
+          logger.info("Notes Deleted Successfully");
+          return res.send({ success: true, message: "Notes Deleted!" });
+        }
       });
     } catch (err) {
       return res.status(500).json({
-        message: "Note not updated",
+        message: "Internal server error",
         success: false,
         data: err,
       });

@@ -33,11 +33,33 @@ class LabelService {
    * @param {*} resolve
    * @param {*} reject
    */
+  // getLabelById = (id, resolve, reject) => {
+  //   labelModel
+  //     .getLabelById(id)
+  //     .then((data) => {
+  //       redisjs.setData(data.id, 180, JSON.stringify(data));
+  //       resolve(data);
+  //     })
+  //     .catch(() => reject());
+  // };
+  // getLabelById = (id) => {
+  //   return new Promise((resolve, reject) => {
+  //     labelModel
+  //       .getLabelById(id)
+  //       .then((data) => {
+  //         redisjs.setData(data.id, 3600, JSON.stringify(data));
+  //         resolve(data);
+  //       })
+  //       .catch((message) => {
+  //         reject(message);
+  //       });
+  //   });
+  // };
   getLabelById = (id, resolve, reject) => {
     labelModel
       .getLabelById(id)
       .then((data) => {
-        redisjs.setData("getLabelById", 180, JSON.stringify(data));
+        redisjs.setData(data.id, 60, JSON.stringify(data));
         resolve(data);
       })
       .catch(() => reject());
@@ -53,7 +75,7 @@ class LabelService {
     labelModel
       .updateLabelById(updateLabel)
       .then((data) => {
-        redisjs.clearCache("getLabelById");
+        redisjs.clearCache(data.id);
         resolve(data);
       })
       .catch(() => reject());
@@ -64,12 +86,23 @@ class LabelService {
    * @param {*} id
    * @returns
    */
-  deleteLabelById = async (id) => {
-    try {
-      return await labelModel.deleteLabelById(id);
-    } catch (err) {
-      return err;
-    }
+
+  // async deleteLabelById(data) {
+  //   const result = await labelModel.deleteLabelById(data);
+  //   if (result) {
+  //     redisjs.clearCache(result.id);
+  //   }
+  //   return result;
+  // }
+  deleteLabelById = async (data, callback) => {
+    await labelModel.deleteLabelById(data, (error, data) => {
+      if (error) {
+        return callback(error, null);
+      } else {
+        redisjs.clearCache(data.id);
+        return callback(null, data);
+      }
+    });
   };
 }
 module.exports = new LabelService();

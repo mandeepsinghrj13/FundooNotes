@@ -1,5 +1,6 @@
 {
     "user": {
+        "tokenname":"",
         "registration": {
             "firstName": "mandibhai",
             "lastName": "jiibhai",
@@ -117,10 +118,9 @@
         "resetPassword":{
             "Password": "Password@1234"
         },
-        "tokenOne":
-            "B eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hbmRlZXAudGVzdDE5OTZAZ21haWwuY29tIiwiaWQiOiI2MTYyODBmZTcwNDFhNTFjMzMxMDI0ODIiLCJpYXQiOjE2MzQ4MjI4NzksImV4cCI6MTYzNDgyNjQ3OX0.R6SLP_GS7GS_I5DhOAEEfLZIFpiv-n9VIz-qoFkVuUw",
+        "tokenOne": "B eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hbmRlZXBzaW5naDE1MTIxOTk2QGdtYWlsLmNvbSIsImlkIjoiNjE3MzkwNDViMWRiN2Q4MWY3OTgwNzhlIiwiaWF0IjoxNjM1MDYwNjY5LCJleHAiOjE2MzUyMzM0Njl9.8DofdYaIEoF9Y-_Gj_PlAgqjnzsZms2-GRTnTZ_c-Kc",
         "tokenTwoInvaild": "B yJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hbmRlZXAudGVzdDE5OTZAZ21haWwuY29tIiwiaWQiOiI2MTYyODBmZTcwNDFhNTFjMzMxMDI0ODIiLCJpYXQiOjE2MzM4NjY2MjgsImV4cCI6MTYzMzg3MzgyOH0.h1Z6aGUpjImdPcoQBK_--MAIl5NMCUmu_14lmXxY6to",
-        "tokenInvaild": "BeyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hbmRlZXAudGVzdDE5OTZAZ21haWwuY29tIiwiaWQiOiI2MTYyODBmZTcwNDFhNTFjMzMxMDI0ODIiLCJpYXQiOjE2MzM4NjY2MjgsImV4cCI6MTYzMzg3MzgyOH0.h1Z6aGUpjImdPcoQBK_--MAIl5NMCUmu_14lmXxY6to"
-
+        "tokenInvaild": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hbmRlZXBzaW5naDE1MTIxOTk2QGdtYWlsLmNvbSIsImlhdCI6MTYzNTA3MzczMSwiZXhwIjoxNjM1MDkxNzMxfQ.nl4AYu9NqFy1aqFmk25btd8gd5H1axr1Uk5IDP-iXUg"
     }
+    
 }

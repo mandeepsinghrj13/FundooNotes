@@ -424,7 +424,7 @@ describe("forgetpassword for positive and negative ", () => {
   /**
    * it function for forgetpassword when email was proper with regex validation .
    */
-  it("GivenForgetPasswordDetails_WhenProper_UserEmail_Successfully", (done) => {
+  it.skip("GivenForgetPasswordDetails_WhenProper_UserEmail_Successfully", (done) => {
     const forgetPasswordDetails = userInputs.forgetpassworduser.ProperEmail;
     chai
       .request(server)
@@ -567,6 +567,23 @@ describe("resetpassword for positive and negative ", () => {
           return done(err);
         }
         res.should.have.status(401);
+        done();
+      });
+  });
+});
+
+describe("confirmregister for positive and negative ", () => {
+  it.only("GivenconfirmregisterDetails_When_TokenLink_Invalid", (done) => {
+    const token = userInputs.reset.tokenTwoInvaild;
+    chai
+      .request(server)
+      .get("/confirmregister")
+      .set({ authorization: token })
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        res.should.have.status(404);
         done();
       });
   });

@@ -19,8 +19,7 @@ dbConnection.database();
 // define a simple route
 app.get("/", (req, res) => {
   res.json({
-    message:
-      "Welcome to FundooNotes application. Take notes quickly. Organize and keep track of all your notes.",
+    message: "Welcome to FundooNotes application. Take notes quickly. Organize and keep track of all your notes.",
   });
 });
 // Require user routes

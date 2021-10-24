@@ -38,7 +38,7 @@ class Service {
     noteModel
       .getNoteById(id)
       .then((data) => {
-        redisjs.setData("getNotesById", 60, JSON.stringify(data));
+        redisjs.setData(data.id, 60, JSON.stringify(data));
         resolve(data);
       })
       .catch(() => reject());
@@ -54,7 +54,7 @@ class Service {
     noteModel
       .updateNoteById(updateNote)
       .then((data) => {
-        redisjs.clearCache("getNotesById");
+        redisjs.clearCache(data.id);
         resolve(data);
       })
       .catch(() => reject());
@@ -65,12 +65,15 @@ class Service {
    * @param {*} id
    * @returns
    */
-  deleteNoteById = async (id) => {
-    try {
-      return await noteModel.deleteNoteById(id);
-    } catch (err) {
-      return err;
-    }
+  deleteNoteById = async (data, callback) => {
+    await noteModel.deleteNoteById(data, (error, data) => {
+      if (error) {
+        return callback(error, null);
+      } else {
+        redisjs.clearCache(data.id);
+        return callback(null, data);
+      }
+    });
   };
 
   /**

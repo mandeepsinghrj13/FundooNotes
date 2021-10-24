@@ -63,7 +63,7 @@ class Model {
 
   getNoteById = (id) => {
     return new Promise((resolve, reject) => {
-      Note.find({ _id: id.noteId, userId: id.userId })
+      Note.findOne({ _id: id.noteId, userId: id.userId })
         .then((data) => resolve(data))
         .catch(() => reject());
     });
@@ -91,12 +91,14 @@ class Model {
    * @param {*} id
    * @returns
    */
-  deleteNoteById = async (id) => {
-    try {
-      return await Note.findOneAndDelete({ $and: [{ _id: id.noteId }, { userId: id.userId }] });
-    } catch (err) {
-      return err;
-    }
+  deleteNoteById = (notedata, callback) => {
+    Note.findOneAndDelete({ _id: notedata.noteId, userId: notedata.userId }, (error, data) => {
+      if (error) {
+        return callback(error, null);
+      } else {
+        return callback(null, data);
+      }
+    });
   };
 
   /**

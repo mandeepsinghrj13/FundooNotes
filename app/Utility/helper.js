@@ -20,7 +20,7 @@ class Helper {
       email: data.email,
       id: data.id,
     };
-    return jwt.sign(dataForToken, sec, { expiresIn: "60m" });
+    return jwt.sign(dataForToken, sec, { expiresIn: "48h" });
   };
 
   jwtTokenGenerateforConfirm = (payload, secretkey, callback) => {

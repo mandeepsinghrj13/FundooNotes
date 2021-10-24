@@ -2,7 +2,7 @@ const amqp = require("amqplib/callback_api");
 
 class RabitMq {
   sender = (data, queue) => {
-    amqp.connect("amqp://localhost", (error, connection) => {
+    amqp.connect(process.env.RABBIT_MQ_SERVER, (error, connection) => {
       if (error) {
         throw error;
       } else {
@@ -22,7 +22,7 @@ class RabitMq {
 
   receiver = (queue) => {
     return new Promise((resolve, reject) => {
-      amqp.connect("amqp://localhost", (error, connection) => {
+      amqp.connect(process.env.RABBIT_MQ_SERVER, (error, connection) => {
         if (error) {
           throw error;
         } else {
@@ -30,10 +30,8 @@ class RabitMq {
             if (error) {
               throw error;
             } else {
-              console.log("mq: ");
               channel.assertQueue(queue);
               channel.consume(queue, (msg) => {
-                // console.log("in receiver ",msg.content.toString());
                 console.log("37 mq: ", msg.content.toString());
                 resolve(msg.content.toString());
               });

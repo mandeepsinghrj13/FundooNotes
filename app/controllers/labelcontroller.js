@@ -117,17 +117,37 @@ class Labels {
           data: validationGetLabelById,
         });
       }
+      // labelService
+      //   .getLabelById(id)
+      //   .then((data) => {
+      //     logger.info("Found label");
+      //     res.status(200).send({
+      //       message: "label retrieved",
+      //       success: true,
+      //       data: data,
+      //     });
+      //   })
+      //   .catch((message) => {
+      //     logger.error("Labels Not found");
+      //     res.status(404).send({
+      //       message: message,
+      //       success: false,
+      //     });
+      //   });
       labelService.getLabelById(id, resolve, reject);
       function resolve(data) {
-        logger.info("Label Found Successfully");
+        logger.info("label Note Found Successfully");
         return res.send({
           success: true,
-          message: "Label Found Successfully",
+          message: "label Note Found Successfully",
           data: data,
         });
       }
       function reject() {
-        return res.send();
+        logger.error("label id note found");
+        return res.send({
+          message: "label Id Not Found In Database",
+        });
       }
     } catch {
       logger.error("Internal server error");
@@ -207,17 +227,25 @@ class Labels {
           data: validationDeleteLabel,
         });
       }
-      const data = await labelService.deleteLabelById(id);
-      if (data.message) {
-        return res.status(400).json({
-          message: "label not found",
-          success: false,
-        });
-      }
-      return res.status(200).json({
-        message: "label Deleted succesfully",
-        success: true,
-        data: data,
+      // const data = await labelService.deleteLabelById(id);
+      // if (data.message) {
+      //   return res.status(400).json({
+      //     message: "label not found",
+      //     success: false,
+      //   });
+      // }
+      // return res.status(200).json({
+      //   message: "label Deleted succesfully",
+      //   success: true,
+      //   data: data,
+      // });
+      await labelService.deleteLabelById(id, (error, data) => {
+        if (error) {
+          return res.send({ success: false, message: "Label Not Deleted!", data: error });
+        } else {
+          logger.info("Label Deleted Successfully");
+          return res.send({ success: true, message: "Label Deleted!" });
+        }
       });
     } catch (err) {
       return res.status(500).json({

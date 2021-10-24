@@ -5,7 +5,7 @@ const client = redis.createClient(process.env.REDIS_PORT);
 
 class RedisClass {
   redisGetById(req, res, next) {
-    client.get("getNotesById", (error, data) => {
+    client.get(req.params.id, (error, data) => {
       if (error) {
         throw error;
       } else if (data) {
@@ -28,7 +28,7 @@ class RedisClass {
    * @param {*} next
    */
   redisGetLabelById(req, res, next) {
-    client.get("getLabelById", (error, data) => {
+    client.get(req.params.id, (error, data) => {
       if (error) {
         throw error;
       } else if (data) {

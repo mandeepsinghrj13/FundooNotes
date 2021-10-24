@@ -466,7 +466,7 @@ describe("add label into note api for positive and negative test case", () => {
 });
 
 describe("get redis note by id api for positive and negative test case", () => {
-  it.only("GivenGetRedisNoteByIdDetails_When_Note_Get_Successfully", (done) => {
+  it("GivenGetRedisNoteByIdDetails_When_Note_Get_Successfully", (done) => {
     const token = noteInputs.notes.loginValidToken;
     const id = noteInputs.notes.GetRedisById;
     chai
@@ -481,7 +481,7 @@ describe("get redis note by id api for positive and negative test case", () => {
         done();
       });
   });
-  it.only("GivenGetRedisNoteByIdDetails_When_Note_RedisGet_SortTime_Successfully", (done) => {
+  it("GivenGetRedisNoteByIdDetails_When_Note_RedisGet_SortTime_Successfully", (done) => {
     const token = noteInputs.notes.loginValidToken;
     const id = noteInputs.notes.GetRedisById;
     chai
@@ -499,7 +499,7 @@ describe("get redis note by id api for positive and negative test case", () => {
 });
 
 describe("update redis note by id api for positive and negative test case", () => {
-  it.only("GivenUpdateRedisNoteByIdDetails_When_Note_Update_Successfully", (done) => {
+  it("GivenUpdateRedisNoteByIdDetails_When_Note_Update_Successfully", (done) => {
     const token = noteInputs.notes.loginValidToken;
     const id = noteInputs.notes.RadisUpdateById;
     const updateNote = {
@@ -519,7 +519,7 @@ describe("update redis note by id api for positive and negative test case", () =
         done();
       });
   });
-  it.only("GivenGetRedisNoteByIdDetails_When_After_Update_Get_Successfully", (done) => {
+  it("GivenGetRedisNoteByIdDetails_When_After_Update_Get_Successfully", (done) => {
     const token = noteInputs.notes.loginValidToken;
     const id = noteInputs.notes.AfterUpdateGetRedisById;
     chai
@@ -534,7 +534,7 @@ describe("update redis note by id api for positive and negative test case", () =
         done();
       });
   });
-  it.only("GivenGetRedisNoteByIdDetails_When_Note_After_Update_RedisGet_SortTime_Successfully", (done) => {
+  it("GivenGetRedisNoteByIdDetails_When_Note_After_Update_RedisGet_SortTime_Successfully", (done) => {
     const token = noteInputs.notes.loginValidToken;
     const id = noteInputs.notes.AfterUpdateGetRedisById;
     chai
