@@ -43,13 +43,9 @@ class Helper {
     try {
       const header = req.headers.authorization;
       const myArr = header.split(" ");
-      // console.log("head: " + header);
       const token = myArr[1];
       const decode = jwt.verify(token, process.env.SECRET_KEY);
       if (decode) {
-        // console.log(
-        //   "token decode email and" + decode.email + " id " + decode.id
-        // );
         logger.info("token verified");
         req.userData = decode;
         next();
@@ -73,13 +69,9 @@ class Helper {
     try {
       const header = req.headers.authorization;
       const myArr = header.split(" ");
-      // console.log("head: " + header);
       const token = myArr[1];
       const decode = jwt.verify(token, process.env.SECRET_KEY_FOR_RESET);
       if (decode) {
-        // console.log(
-        //   "token decode email and" + decode.email + " id " + decode.id
-        // );
         logger.info("token verified");
         req.userData = decode;
         next();

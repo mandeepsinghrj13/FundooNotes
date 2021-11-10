@@ -1,9 +1,11 @@
 const express = require("express");
+const cors = require("cors");
 // const bodyParser = require("body-parser");
 require("dotenv").config();
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./app/Utility/swagger.json");
 const app = express();
+app.use(cors());
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 const logger = require("../FundooNotes/app/Utility/logger");
 // parse requests of content-type - application/x-www-form-urlencoded

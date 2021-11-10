@@ -64,7 +64,7 @@ class SendResetPassMail {
       to: data.email, // list of receivers
       subject: "Verify Your E-Mail - Fundoo notes account", // Subject line
       text: `Hello ${data.firstName}.`, // plain text body
-      html: `<b>Hello ${data.firstName}. Here is your link to Verify Mail: <button href="${link}"> <a href="${link}">reset password</a></button></b>`, // html body
+      html: `<b>Hello ${data.firstName}. Here is your link to Verify Mail: <button href="${link}"> <a href="${link}">Please click this link to verify email</a></button></b>`, // html body
     });
   };
 }

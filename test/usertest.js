@@ -573,7 +573,7 @@ describe("resetpassword for positive and negative ", () => {
 });
 
 describe("confirmregister for positive and negative ", () => {
-  it.only("GivenconfirmregisterDetails_When_TokenLink_Invalid", (done) => {
+  it("GivenconfirmregisterDetails_When_TokenLink_Invalid", (done) => {
     const token = userInputs.reset.tokenTwoInvaild;
     chai
       .request(server)

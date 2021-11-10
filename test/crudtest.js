@@ -9,7 +9,7 @@ chai.use(chaiHttp);
 chai.should();
 
 describe("create note api for positive and negative test case", () => {
-  it("GivenNotesDetails_When_Note_Created_Successfully", (done) => {
+  it.skip("GivenNotesDetails_When_Note_Created_Successfully", (done) => {
     const token = noteInputs.notes.loginValidToken;
     const createNotes = {
       title: faker.lorem.word(),
