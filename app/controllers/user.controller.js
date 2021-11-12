@@ -158,6 +158,7 @@ class Controller {
       }
       // userService.forgetPassword heat on user.service.js file
       userService.forgetPassword(user, (error, data) => {
+        console.log("161", data);
         if (data === null) {
           logger.error("Email Not Exist");
           return res.status(409).json({

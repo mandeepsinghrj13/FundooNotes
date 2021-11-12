@@ -86,11 +86,15 @@ class UserService {
 
   // forgetPassword
   forgetPassword = (user, callback) => {
+    // console.log("89");
     userModel.forgetPassword(user, (err, data) => {
       if (data === null) {
+        console.log("error", err);
         logger.error("email not in database");
         return callback(err, null);
       } else {
+        console.log("96", data);
+        // console.log("97", mailUser.sendEmail(data));
         return callback(null, mailUser.sendEmail(data));
       }
     });

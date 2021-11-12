@@ -135,6 +135,7 @@ class userModel {
           logger.error("email not Exist");
           return callback(err, null);
         } else {
+          console.log("138", data);
           return callback(null, data);
         }
       });

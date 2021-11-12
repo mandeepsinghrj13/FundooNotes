@@ -7,6 +7,7 @@ const logger = require("./logger");
 // const jwt = require("jsonwebtoken");
 require("dotenv").config();
 exports.sendEmail = (data) => {
+  console.log(data, "10 nodemailer");
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -36,7 +37,7 @@ exports.sendEmail = (data) => {
    */
   transporter.sendMail(mailOptions, (err, info) => {
     if (err) {
-      console.log(err);
+      console.log(err, "nodemailer");
       return null;
     } else {
       const data = {
@@ -47,8 +48,8 @@ exports.sendEmail = (data) => {
     }
   });
 };
-class SendResetPassMail {
-  sendConfirmMail = (token, data) => {
+//class SendResetPassMail {
+ exports.sendConfirmMail = (token, data) => {
     const link = `http://localhost:${process.env.PORT}/confirmregister/${token}`;
     // create reusable transporter object using the default SMTP transport
     let transporter = nodemailer.createTransport({
@@ -67,6 +68,6 @@ class SendResetPassMail {
       html: `<b>Hello ${data.firstName}. Here is your link to Verify Mail: <button href="${link}"> <a href="${link}">Please click this link to verify email</a></button></b>`, // html body
     });
   };
-}
+//}
 
-module.exports = new SendResetPassMail();
+//module.exports = new SendResetPassMail();
