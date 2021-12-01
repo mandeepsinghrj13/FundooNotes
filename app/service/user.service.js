@@ -5,8 +5,8 @@ const helper = require("../Utility/helper");
 const logger = require("../Utility/logger.js");
 const mailUser = require("../Utility/nodemailer");
 const jwt = require("jsonwebtoken");
-const sendLinkMail = require("../utility/nodemailer");
-const rabit = require("../utility/rabitmq");
+const sendLinkMail = require("../Utility/nodemailer");
+const rabit = require("../Utility/rabitmq");
 // creating a class
 class UserService {
   // registraion for new user register
