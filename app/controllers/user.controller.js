@@ -45,7 +45,7 @@ class Controller {
           res.status(201).json({
             success: true,
             data: data,
-            message: "User Data Inserted successfully",
+            message: "User Data Inserted Successfully",
           });
         }
       });
